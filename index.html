@@ -54,10 +54,9 @@
       display: grid; place-items: center;
       box-shadow: 0 0 0 2px rgba(245,197,24,.35);
     }
-    .crest span {
+    .crest img {
       width: 38px; height: 38px; border-radius: 50%;
-      background: #081830; display: grid; place-items: center;
-      font-family: Bebas Neue, sans-serif; color: var(--gold); font-size: 18px; letter-spacing: .5px;
+      background: #fff; object-fit: contain; padding: 2px;
     }
     .brand h1 { font-size: 15px; font-weight: 800; letter-spacing: .4px; }
     .brand p { font-size: 11px; color: var(--muted); }
@@ -68,6 +67,19 @@
       border: 1px solid transparent;
     }
     nav.links a:hover { color: var(--gold-2); border-color: var(--line); background: rgba(245,197,24,.06); }
+    .livebox { display: flex; align-items: center; gap: 10px; }
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 800; letter-spacing: .6px;
+      padding: 7px 11px; border-radius: 999px;
+      background: rgba(46,229,157,.12); color: var(--win);
+      border: 1px solid rgba(46,229,157,.28);
+    }
+    .live-pill.cache { background: rgba(240,193,75,.12); color: var(--draw); border-color: rgba(240,193,75,.3); }
+    .live-pill.off { background: rgba(255,93,108,.12); color: var(--loss); border-color: rgba(255,93,108,.28); }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 0 currentColor; animation: pulse 1.6s infinite; }
+    @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+    .upd { font-size: 11px; color: var(--muted); }
 
     .hero {
       position: relative; overflow: hidden;
@@ -94,6 +106,17 @@
     }
     .hero h2 em { color: var(--gold); font-style: normal; }
     .hero .lead { max-width: 560px; color: #d5e0f0; font-size: 15px; }
+    .yorum-box { max-width: 680px; margin-top: 4px; min-height: 96px; position: relative; z-index: 1; }
+    .yorum-kicker {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold);
+    }
+    .yorum-line { font-size: 16px; line-height: 1.5; font-weight: 600; color: #eaf1fb; }
+    .yorum-line b { color: var(--gold-2); font-weight: 800; }
+    .yorum-meta { margin-top: 8px; font-size: 11px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
+    .yorum-dots { display: flex; gap: 5px; margin-top: 10px; }
+    .yorum-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.22); cursor: pointer; }
+    .yorum-dots i.on { background: var(--gold); }
     .hero-meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 22px; position: relative; z-index: 1; }
     .chip {
       background: rgba(8,24,48,.7); border: 1px solid var(--line);
@@ -102,16 +125,56 @@
     .chip b { display: block; font-size: 20px; }
     .chip span { font-size: 11px; color: var(--muted); }
 
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
-    .stat {
-      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px;
+    .karnesi {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr .9fr; gap: 14px; margin-bottom: 28px;
     }
-    .stat .lbl { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+    .stat {
+      background:
+        linear-gradient(180deg, rgba(245,197,24,.08), transparent 42%),
+        var(--card);
+      border: 1px solid var(--line); border-radius: 20px; padding: 16px 18px;
+    }
+    .stat .lbl { font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
     .stat .val { font-family: Bebas Neue, sans-serif; font-size: 38px; line-height: 1; margin-top: 6px; }
-    .stat .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
-    .form { display: flex; gap: 6px; margin-top: 10px; }
-    .dot { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #06142b; }
+    .stat .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .cards-split { display: flex; gap: 16px; align-items: baseline; margin-top: 6px; }
+    .cards-split b { font-family: Bebas Neue, sans-serif; font-size: 34px; line-height: 1; }
+    .news-list { display: grid; gap: 8px; margin-top: 10px; }
+    .news-list a { color: #eaf1fb; font-size: 12px; font-weight: 700; line-height: 1.35; text-decoration: none; }
+    .news-list a:hover { color: var(--gold); }
+    .gbm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    .gbm i { display: block; text-align: center; background: #081830; border: 1px solid var(--line); border-radius: 12px; padding: 8px 4px; }
+    .gbm b { display: block; font-family: Bebas Neue, sans-serif; font-size: 26px; line-height: 1; }
+    .gbm span { font-size: 10px; color: var(--muted); font-weight: 700; }
+    .gbm .g b { color: var(--win); } .gbm .b b { color: var(--draw); } .gbm .m b { color: var(--loss); }
+    .form { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .dot { width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #06142b; }
     .dot.W { background: var(--win); } .dot.D { background: var(--draw); } .dot.L { background: var(--loss); }
+    .split-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; }
+    .split-line b { font-family: Bebas Neue, sans-serif; font-size: 28px; }
+    .half-boards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .half-col {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px;
+    }
+    .half-col h4 { font-size: 18px; margin-bottom: 4px; }
+    .half-col p { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+    .club-stats { margin-bottom: 28px; }
+    .club-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .club-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px;
+    }
+    .club-card h4 { font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .club-row {
+      display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center;
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 13px;
+    }
+    .club-row:last-child { border-bottom: 0; }
+    .club-row b { color: var(--gold-2); font-family: Bebas Neue, sans-serif; font-size: 20px; }
+    .rate-row { margin: 8px 0 10px; }
+    .rate-row .lab { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+    .rate-row .lab b { color: var(--gold-2); }
+    .ratebar { height: 8px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; }
+    .ratebar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
 
     section { margin-bottom: 36px; }
     .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
@@ -121,15 +184,32 @@
     .panel {
       background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
     }
+    .duo { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-bottom: 28px; align-items: stretch; }
+    .duo > section { display: flex; flex-direction: column; min-height: 0; }
+    .duo .panel { flex: 1; display: flex; flex-direction: column; height: 530px; }
+    .table-scroll { flex: 1; min-height: 0; height: 478px; max-height: 478px; overflow-y: scroll; }
+    .table-scroll::-webkit-scrollbar { width: 8px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: rgba(245,197,24,.45); border-radius: 99px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 11px 12px; text-align: left; font-size: 13px; }
-    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); background: #0b1c38; position: sticky; top: 0; z-index: 1; }
     tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); }
     tbody tr:hover { background: rgba(245,197,24,.05); }
     .pos { width: 36px; font-weight: 800; color: var(--gold); }
     .team { font-weight: 700; }
-    .fb-row { background: linear-gradient(90deg, rgba(245,197,24,.16), transparent 70%); }
+    .team-cell { display: flex; align-items: center; gap: 8px; }
+    .team-cell img, .fx img {
+      width: 22px; height: 22px; object-fit: contain; flex-shrink: 0;
+      background: #fff; border-radius: 50%; padding: 1px;
+    }
+    tbody tr { box-shadow: inset 3px 0 0 var(--tc, transparent); }
+    .fb-row {
+      position: sticky; top: 38px; z-index: 2;
+      background: linear-gradient(90deg, #1a3d86, #0b1c38 70%) !important;
+      box-shadow: 0 6px 14px rgba(0,0,0,.3);
+    }
     .fb-row td { color: #fff; }
+    .fx.nextfx { position: sticky; top: 0; z-index: 2; background: #12284e; }
     .pts { font-weight: 800; }
     .legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 12px 16px; color: var(--muted); font-size: 11px; }
     .lg { display: flex; align-items: center; gap: 6px; }
@@ -137,7 +217,7 @@
     .cl { background: #4ea8ff; } .el { background: #7a5cff; } .conf { background: #2ee59d; } .rel { background: #ff5d6c; }
 
     .next {
-      display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-bottom: 28px;
+      display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 28px;
     }
     .next-card {
       background:
@@ -150,46 +230,118 @@
     .badge {
       width: 64px; height: 64px; margin: 0 auto 8px; border-radius: 50%;
       display: grid; place-items: center; font-family: Bebas Neue, sans-serif; font-size: 22px;
-      background: #0a1c3a; border: 2px solid var(--gold);
+      background: #0a1c3a; border: 2px solid var(--gold); overflow: hidden;
     }
+    .badge img { width: 48px; height: 48px; object-fit: contain; background: #fff; border-radius: 50%; padding: 3px; }
     .vs-mid { text-align: center; color: var(--muted); }
-    .vs-mid b { display: block; color: var(--gold); font-family: Bebas Neue, sans-serif; font-size: 28px; }
+    .vs-mid b { display: block; color: var(--gold); font-family: Bebas Neue, sans-serif; font-size: 34px; line-height: 1; }
+    .vs-mid .kick { display: block; margin-top: 6px; font-size: 13px; color: #d5e0f0; font-weight: 700; }
+    .ha-tag { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 800; letter-spacing: .6px; padding: 3px 8px; border-radius: 999px; }
+    .next-facts {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px;
+    }
+    .next-fact {
+      background: rgba(8,24,48,.65); border: 1px solid var(--line); border-radius: 14px;
+      padding: 10px 8px; text-align: center;
+    }
+    .next-fact b { display: block; font-family: Bebas Neue, sans-serif; font-size: 20px; color: var(--gold-2); }
+    .next-fact span { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: .4px; }
+    .next-note { margin-top: 12px; font-size: 12px; color: #c5d4e8; line-height: 1.45; }
+    .scorer-list { margin-top: 12px; display: grid; gap: 6px; }
+    .scorer {
+      display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center;
+      padding: 6px 8px; border-radius: 10px;
+    }
+    .scorer.fb { background: rgba(245,197,24,.14); }
+    .scorer .rk { font-weight: 800; color: var(--gold); font-size: 12px; }
+    .scorer .nm { font-size: 13px; font-weight: 700; line-height: 1.2; }
+    .scorer .tm { display: block; font-size: 11px; color: var(--muted); font-weight: 600; }
+    .scorer .gl { font-family: Bebas Neue, sans-serif; font-size: 22px; color: var(--gold-2); }
 
     .matches { display: grid; gap: 12px; }
     .match {
       background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
     }
     .match-top {
-      display: grid; grid-template-columns: 90px 1fr auto; gap: 12px; align-items: center;
+      display: grid;
+      grid-template-columns: 168px minmax(110px,1fr) 92px minmax(110px,1fr) 118px;
+      gap: 10px; align-items: center;
       padding: 14px 16px; cursor: pointer;
     }
     .week { font-size: 11px; color: var(--muted); font-weight: 700; }
     .week b { display: block; color: var(--gold); font-size: 16px; }
-    .scoreline { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .week .when { white-space: nowrap; }
+    .scoreline { display: contents; font-weight: 800; }
+    .scoreline .tn { min-width: 0; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .scoreline .tn.home { text-align: right; }
+    .scoreline .tn.away { text-align: left; }
     .score {
-      min-width: 72px; text-align: center; font-family: Bebas Neue, sans-serif; font-size: 28px;
-      background: #081830; border-radius: 10px; padding: 2px 10px; border: 1px solid var(--line);
+      width: 92px; justify-self: center; text-align: center;
+      font-family: Bebas Neue, sans-serif; font-size: 28px;
+      background: #081830; border-radius: 10px; padding: 2px 6px; border: 1px solid var(--line);
     }
-    .res { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; }
+    .res { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; width: 118px; text-align: center; justify-self: end; }
     .res.W { background: rgba(46,229,157,.15); color: var(--win); }
     .res.D { background: rgba(240,193,75,.15); color: var(--draw); }
     .res.L { background: rgba(255,93,108,.15); color: var(--loss); }
-    .match-body { display: none; padding: 0 16px 16px; border-top: 1px solid rgba(255,255,255,.05); }
+    .match-body { display: none; padding: 16px; border-top: 1px solid rgba(255,255,255,.05); background: rgba(4,12,28,.28); }
     .match.open .match-body { display: block; }
-    .meta-row { display: flex; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 12px; padding: 12px 0; }
-    .goals { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .goals ul { list-style: none; font-size: 13px; }
-    .goals li { padding: 4px 0; }
-    .stats {
-      display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center;
-      margin-top: 12px;
+    .meta-row { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 14px; }
+    .meta-chip {
+      background: rgba(8,24,48,.7); border: 1px solid var(--line); border-radius: 999px;
+      padding: 6px 10px; font-size: 12px; color: #d7e3f5;
     }
-    .st-lbl { text-align: center; font-size: 11px; color: var(--muted); }
-    .barwrap { height: 7px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; display: flex; }
+    .detail-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; }
+    .panel-mini { background: rgba(8,24,48,.55); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+    .panel-mini h4 { font-size: 12px; letter-spacing: .8px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .tl { display: grid; gap: 8px; }
+    .tl-item { display: grid; grid-template-columns: 58px 1fr auto; gap: 8px; align-items: center; font-size: 13px; }
+    .tl-min { font-weight: 800; color: var(--gold); }
+    .tl-who { font-weight: 700; }
+    .tl-tag { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: rgba(245,197,24,.14); color: var(--gold); }
+    .tl-tag.pen { background: rgba(46,229,157,.14); color: var(--win); }
+    .tl-tag.card { background: rgba(240,193,75,.16); color: var(--draw); }
+    .tl-tag.red { background: rgba(255,93,108,.16); color: var(--loss); }
+    .tl-tag.sub { background: rgba(78,168,255,.14); color: #9fd0ff; }
+    .xi { display: flex; flex-wrap: wrap; gap: 6px; }
+    .xi span {
+      font-size: 11px; padding: 5px 8px; border-radius: 8px;
+      background: #081830; border: 1px solid var(--line);
+    }
+    .xi span b { color: var(--gold); margin-right: 4px; }
+    .stats-block { margin-top: 14px; }
+    .statline { display: grid; grid-template-columns: 42px 1fr 42px; gap: 8px; align-items: center; margin: 8px 0; }
+    .statline b { font-size: 13px; }
+    .statline .st-lbl { text-align: center; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .barwrap { height: 8px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; display: flex; }
     .barwrap i { height: 100%; }
     .lbar { background: var(--gold); }
-    .rbar { background: #4ea8ff; margin-left: auto; }
+    .rbar { background: #4ea8ff; }
     .note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+    .stat-goal { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; }
+    .pitch-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .pitch {
+      background: radial-gradient(circle at 50% 50%, #1b7a3a 0%, #0e4d24 70%);
+      border: 2px solid rgba(255,255,255,.18); border-radius: 16px; padding: 12px 8px 16px;
+      min-height: 280px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .pitch-name { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: .6px; color: #e8ffe8; margin-bottom: 8px; }
+    .pline { display: flex; justify-content: space-evenly; align-items: center; padding: 4px 0; }
+    .pnode { width: 64px; text-align: center; }
+    .pnode i {
+      display: grid; place-items: center; width: 28px; height: 28px; margin: 0 auto 4px;
+      border-radius: 50%; background: #06142b; border: 2px solid var(--gold); color: var(--gold);
+      font-size: 11px; font-weight: 800;
+    }
+    .pnode span { display: block; font-size: 10px; font-weight: 700; color: #fff; line-height: 1.15; }
+    .pnode.out i { border-color: #ff5d6c; color: #ff5d6c; }
+    .subs { display: grid; gap: 6px; margin-top: 10px; }
+    .sub { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .sub .arr { width: 22px; text-align: center; font-size: 14px; }
+    .sub.in { color: #2ee59d; }
+    .sub.out { color: #ff5d6c; }
+    .goal-tbl { width: 100%; }
+    .goal-tbl td { padding: 6px 4px; }
 
     .tabs { display: flex; gap: 8px; }
     .tabs button {
@@ -198,9 +350,9 @@
     }
     .tabs button.on { color: #06142b; background: var(--gold); border-color: var(--gold); }
 
-    .fix-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .fix-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
     .fx {
-      display: grid; grid-template-columns: 54px 1fr auto; gap: 10px; align-items: center;
+      display: grid; grid-template-columns: 46px 24px 1fr auto; gap: 8px; align-items: center;
       padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(8,24,48,.45);
     }
     .fx.done { opacity: .78; }
@@ -214,8 +366,11 @@
 
     footer { color: var(--muted); font-size: 12px; padding: 28px 0 40px; border-top: 1px solid var(--line); }
     @media (max-width: 900px) {
-      .grid-4, .next, .fix-grid, .goals { grid-template-columns: 1fr; }
-      .match-top { grid-template-columns: 1fr; }
+      .grid-4, .karnesi, .next, .fix-grid, .detail-grid, .next-facts, .half-boards, .club-grid, .duo, .stat-goal, .pitch-duo { grid-template-columns: 1fr; }
+      .match-top { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .scoreline { display: grid; grid-template-columns: minmax(0,1fr) 92px minmax(0,1fr); width: 100%; align-items: center; gap: 8px; }
+      .scoreline .tn.home, .scoreline .tn.away { text-align: center; }
+      .res { width: auto; justify-self: center; }
       nav.links { display: none; }
     }
   </style>
@@ -224,105 +379,98 @@
   <header>
     <div class="wrap nav">
       <div class="brand">
-        <div class="crest"><span>FB</span></div>
+        <div class="crest"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/436.png" alt="Fenerbahçe"></div>
         <div>
           <h1>FENERBAHÇE 2026–27</h1>
           <p>Trendyol Süper Lig · Lig Merkezi</p>
         </div>
       </div>
-      <nav class="links">
-        <a href="#ozet">Özet</a>
-        <a href="#tablo">Puan Durumu</a>
-        <a href="#maclar">Oynanan Maçlar</a>
-        <a href="#fikstur">Fikstür</a>
-      </nav>
+      <div class="livebox">
+        <nav class="links">
+          <a href="#ozet">Özet</a>
+          <a href="#tablo">Puan Durumu</a>
+          <a href="#maclar">Oynanan Maçlar</a>
+          <a href="#fikstur">Fikstür</a>
+        </nav>
+        <span class="live-pill cache" id="livePill"><i class="pulse"></i> YEDEK VERİ</span>
+      </div>
     </div>
   </header>
 
   <main class="wrap">
     <section class="hero" id="ozet">
-      <span class="kicker">Kadıköy · 6. hafta sonrası</span>
+      <span class="kicker" id="heroKicker">Kadıköy · canlı lig merkezi</span>
       <h2>SARI LACİVERT<br><em>LİG MERKEZİ</em></h2>
-      <p class="lead">2026–27 Trendyol Süper Lig sezonunda Fenerbahçe’nin fikstürü, güncel puan durumu ve oynanan maç istatistikleri tek ekranda.</p>
+      <div class="yorum-box" id="yorumBox">
+        <div class="yorum-kicker">Haftanın Yorumu</div>
+        <p class="yorum-line" id="yorumLine"><b>Yükleniyor:</b> Bu haftanın medya yorumları hazırlanıyor.</p>
+        <div class="yorum-meta"><span id="yorumSrc">Türk medyası · 6. hafta</span><span id="yorumIdx">1/10</span></div>
+        <div class="yorum-dots" id="yorumDots"></div>
+      </div>
       <div class="hero-meta">
-        <div class="chip"><b>6.</b><span>Sıra</span></div>
-        <div class="chip"><b>10</b><span>Puan</span></div>
-        <div class="chip"><b>16-6</b><span>Gol / Yenilen</span></div>
-        <div class="chip"><b>+10</b><span>Averaj</span></div>
+        <div class="chip"><b id="chipPos">6.</b><span>Sıra</span></div>
+        <div class="chip"><b id="chipPts">10</b><span>Puan</span></div>
+        <div class="chip"><b id="chipGoals">16-6</b><span>Gol / Yenilen</span></div>
+        <div class="chip"><b id="chipGd">+10</b><span>Averaj</span></div>
       </div>
     </section>
 
-    <div class="grid-4">
-      <article class="stat">
-        <div class="lbl">Sezon karnesi</div>
-        <div class="val">3-1-2</div>
-        <div class="sub">Galibiyet · Beraberlik · Mağlubiyet</div>
-        <div class="form">
-          <span class="dot L">M</span><span class="dot W">G</span><span class="dot W">G</span>
-          <span class="dot L">M</span><span class="dot D">B</span><span class="dot W">G</span>
-        </div>
-      </article>
-      <article class="stat">
-        <div class="lbl">İç saha</div>
-        <div class="val">2-0-1</div>
-        <div class="sub">13 gol / 4 yenilen · +9</div>
-      </article>
-      <article class="stat">
-        <div class="lbl">Deplasman</div>
-        <div class="val">1-1-1</div>
-        <div class="sub">3 gol / 2 yenilen · +1</div>
-      </article>
-      <article class="stat">
-        <div class="lbl">Gol kralı (lig)</div>
-        <div class="val">MURIQI</div>
-        <div class="sub">6 gol · Greenwood 4 · Lukaku 2</div>
-      </article>
-    </div>
-
     <div class="next">
-      <article class="next-card">
-        <span class="kicker">Sıradaki lig maçı · 7. hafta</span>
-        <div class="vs">
-          <div class="side">
-            <div class="badge">RIZ</div>
-            <strong>Ç. Rizespor</strong>
-            <div class="d" style="color:var(--muted);font-size:12px;margin-top:4px">Deplasman</div>
-          </div>
-          <div class="vs-mid">
-            <span>10 Ekim 2026</span>
-            <b>19:00</b>
-            <span>Çaykur Didi Stadyumu</span>
-          </div>
-          <div class="side">
-            <div class="badge">FB</div>
-            <strong>Fenerbahçe</strong>
-            <div class="d" style="color:var(--muted);font-size:12px;margin-top:4px">Misafir</div>
-          </div>
-        </div>
-      </article>
-      <article class="next-card">
-        <span class="kicker">Sezon notu</span>
-        <h3 style="font-family:Bebas Neue;font-size:34px;margin:10px 0 8px">EN FARKLI GALİBİYET</h3>
-        <p style="font-size:22px;font-weight:800">Fenerbahçe 8–0 Eyüpspor</p>
-        <p style="color:var(--muted);margin-top:8px;font-size:13px">20 Eylül 2026 · Şükrü Saracoğlu · Muriqi 4 gol</p>
+      <article class="next-card" id="nextCard">
+        <span class="kicker" id="nextKicker">Sıradaki lig maçı</span>
+        <div class="vs" id="nextVs"></div>
+        <div id="nextExtra"></div>
       </article>
     </div>
 
-    <section id="tablo">
+    <section class="club-stats" id="takimstat">
       <div class="sec-head">
         <div>
-          <h3>Puan Durumu</h3>
-          <p>6. hafta sonu · 20 Eylül 2026 itibarıyla</p>
+          <h3>Fenerbahçe İstatistikleri</h3>
+          <p>Gol ve asist ESPN kadrosundan; pas verileri Süper Lig 6. hafta</p>
+        </div>
+      </div>
+      <div class="club-grid">
+        <article class="club-card"><h4>Gol krallığı</h4><div id="fbGoals"></div></article>
+        <article class="club-card"><h4>Asist / şut pası</h4><div id="fbAst"></div></article>
+        <article class="club-card"><h4>Pas başarı yüzdesi</h4><div id="fbPass"></div></article>
+        <article class="club-card"><h4>Başarılı pas / maç</h4><div id="fbPassPg"></div></article>
+      </div>
+      <div class="club-grid" style="margin-top:14px">
+        <article class="club-card"><h4>Maç sonucu oranları</h4><div id="rateMS"></div></article>
+        <article class="club-card"><h4>İlk yarı sonucu oranları</h4><div id="rateIY"></div></article>
+        <article class="club-card"><h4>Toplam gol oranları</h4><div id="rateTG"></div></article>
+        <article class="club-card"><h4>Gollerin zaman dağılımı</h4><div id="rateTM"></div></article>
+      </div>
+    </section>
+
+    <section id="maclar">
+      <div class="sec-head">
+        <div>
+          <h3>Oynanan Maçlar</h3>
+          <p>Son 5 maç · Süper Lig ve UEFA Şampiyonlar Ligi</p>
+        </div>
+      </div>
+      <div class="matches" id="matchList"></div>
+    </section>
+
+    <div class="duo" id="tablo">
+      <section>
+      <div class="sec-head">
+        <div>
+          <h3>Türkiye Süper Ligi</h3>
+          <p id="tableNote">10 takım görünür · kaydırarak tüm tablo</p>
         </div>
       </div>
       <div class="panel">
+        <div class="table-scroll">
         <table>
           <thead>
             <tr>
               <th>#</th><th>Takım</th><th>O</th><th>G</th><th>B</th><th>M</th><th>A</th><th>Y</th><th>Av</th><th>P</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tableBody">
             <tr><td class="pos">1</td><td class="team">Amed SK</td><td>6</td><td>4</td><td>1</td><td>1</td><td>15</td><td>7</td><td>+8</td><td class="pts">13</td></tr>
             <tr><td class="pos">2</td><td class="team">Galatasaray</td><td>6</td><td>4</td><td>1</td><td>1</td><td>13</td><td>10</td><td>+3</td><td class="pts">13</td></tr>
             <tr><td class="pos">3</td><td class="team">Beşiktaş</td><td>6</td><td>4</td><td>0</td><td>2</td><td>14</td><td>7</td><td>+7</td><td class="pts">12</td></tr>
@@ -343,6 +491,7 @@
             <tr><td class="pos">18</td><td class="team">Eyüpspor</td><td>6</td><td>1</td><td>0</td><td>5</td><td>2</td><td>16</td><td>-14</td><td class="pts">3</td></tr>
           </tbody>
         </table>
+        </div>
         <div class="legend">
           <span class="lg"><i class="bar cl"></i> ŞL lig aşaması / eleme</span>
           <span class="lg"><i class="bar el"></i> Avrupa Ligi eleme</span>
@@ -350,85 +499,71 @@
           <span class="lg"><i class="bar rel"></i> Küme düşme hattı (16–18)</span>
         </div>
       </div>
-    </section>
+      </section>
+      <section id="fikstur">
+        <div class="sec-head">
+          <div>
+            <h3>Fikstür</h3>
+            <p>10 maç görünür · kaydırarak tüm fikstür</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="table-scroll" id="fixAll"></div>
+        </div>
+      </section>
+    </div>
 
-    <section id="maclar">
+    <div class="duo" id="ucltablo">
+      <section>
       <div class="sec-head">
         <div>
-          <h3>Oynanan Maçlar</h3>
-          <p>Kartı açarak gol dakikaları ve maç özet istatistiklerini görün</p>
+          <h3>UEFA Şampiyonlar Ligi</h3>
+          <p id="uclNote">10 takım görünür · kaydırarak tüm tablo</p>
         </div>
       </div>
-      <div class="matches" id="matchList"></div>
-    </section>
+      <div class="panel">
+        <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Takım</th><th>O</th><th>G</th><th>B</th><th>M</th><th>A</th><th>Y</th><th>Av</th><th>P</th>
+            </tr>
+          </thead>
+          <tbody id="uclBody"></tbody>
+        </table>
+        </div>
+        <div class="legend">
+          <span class="lg"><i class="bar cl"></i> Son 16</span>
+          <span class="lg"><i class="bar el"></i> Play-off</span>
+        </div>
+      </div>
+      </section>
+      <section>
+        <div class="sec-head">
+          <div>
+            <h3>Fikstür</h3>
+            <p>Şampiyonlar Ligi maçları</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="table-scroll" id="uclFix"></div>
+        </div>
+      </section>
+    </div>
 
-    <section id="fikstur">
-      <div class="sec-head">
-        <div>
-          <h3>34 Haftalık Fikstür</h3>
-          <p>Fikstür çekimi: 9 Temmuz 2026 · 14 Ağustos 2026 – 23 Mayıs 2027</p>
-        </div>
-        <div class="tabs">
-          <button class="on" data-half="all">Tümü</button>
-          <button data-half="1">1. yarı</button>
-          <button data-half="2">2. yarı</button>
-        </div>
-      </div>
-      <div class="fix-grid" id="fixGrid"></div>
-    </section>
   </main>
 
   <footer>
     <div class="wrap">
-      Veriler 20–25 Eylül 2026 itibarıyla TFF / Wikipedia / FBref özetlerinden derlenmiştir. Saatler yayıncı kuruluş güncellemesine göre değişebilir.
-      Şut ve topa sahip olma değerleri maç karakterine göre tasarım amaçlı özet istatistiklerdir; resmi TFF raporunun yerini tutmaz.
+      Canlı veri kaynağı: ESPN public API (tur.1). Fikstür iskeleti resmi çekim listesidir; skor ve istatistikler maç bittikçe API’den yazılır.
+      İnternet yoksa veya API yanıt vermezse ekrandaki son başarılı / yedek veri korunur.
     </div>
   </footer>
 
   <script>
-    const matches = [
-      {
-        w:1, date:"15 Ağu 2026 · 21:30", home:"Gençlerbirliği", away:"Fenerbahçe", hs:2, as:1, res:"L",
-        venue:"Eryaman Stadyumu, Ankara", ref:"Oğuzhan Aksu", att:"—",
-        homeGoals:["Tongya 37'","Ülgün 56'"],
-        awayGoals:["Talisca 13'","Aktürkoğlu 58'"],
-        stats:{pos:[42,58], shots:[9,14], sog:[4,5], corners:[3,7]}
-      },
-      {
-        w:2, date:"22 Ağu 2026 · 20:30", home:"Fenerbahçe", away:"Konyaspor", hs:4, as:2, res:"W",
-        venue:"Şükrü Saracoğlu, İstanbul", ref:"Atilla Karaoğlan", att:"—",
-        homeGoals:["Muriqi 7'","Greenwood 20'","Asensio 33'","Greenwood 49'"],
-        awayGoals:["Colley 10'","Türüç 45'"],
-        stats:{pos:[61,39], shots:[18,8], sog:[9,4], corners:[8,3]}
-      },
-      {
-        w:3, date:"30 Ağu 2026 · 21:30", home:"Samsunspor", away:"Fenerbahçe", hs:0, as:2, res:"W",
-        venue:"Samsun 19 Mayıs Stadyumu", ref:"Yasin Kol", att:"12.794",
-        homeGoals:[],
-        awayGoals:["Muriqi 3'","Oğuz Aydın 49'","Lukaku 70'"],
-        stats:{pos:[46,54], shots:[7,13], sog:[2,6], corners:[4,6]}
-      },
-      {
-        w:4, date:"5 Eyl 2026 · 20:00", home:"Fenerbahçe", away:"Beşiktaş", hs:1, as:2, res:"L",
-        venue:"Şükrü Saracoğlu, İstanbul", ref:"Halil Umut Meler", att:"44.935",
-        homeGoals:["Škriniar 26'"],
-        awayGoals:["R. Yılmaz 38'","Vlahović 73'"],
-        stats:{pos:[57,43], shots:[15,11], sog:[4,5], corners:[7,4]}
-      },
-      {
-        w:5, date:"14 Eyl 2026 · 20:00", home:"Gaziantep FK", away:"Fenerbahçe", hs:0, as:0, res:"D",
-        venue:"Gaziantep Stadyumu", ref:"Mehmet Türkmen", att:"13.321",
-        homeGoals:[], awayGoals:[],
-        stats:{pos:[38,62], shots:[6,16], sog:[1,4], corners:[2,9]}
-      },
-      {
-        w:6, date:"20 Eyl 2026 · 17:00", home:"Fenerbahçe", away:"Eyüpspor", hs:8, as:0, res:"W",
-        venue:"Şükrü Saracoğlu, İstanbul", ref:"Kadir Sağlam", att:"—",
-        homeGoals:["Greenwood 4' (p)","Muriqi 7'","Muriqi 21'","Guendouzi 38'","Kahveci 45+1'","Muriqi 47'","Muriqi 55'","Greenwood 80'","Lukaku 89'"],
-        awayGoals:[],
-        stats:{pos:[72,28], shots:[24,3], sog:[14,1], corners:[11,1]}
-      }
-    ];
+    const ESPN = "https://site.api.espn.com/apis";
+    const TEAM = "436";
+    const FB_NAMES = ["fenerbahce", "fenerbahçe"];
 
     const fixtures = [
       [1,"15 Ağu 2026","Gençlerbirliği","D","2-1"],
@@ -467,75 +602,889 @@
       [34,"23 May 2027","Amed SK","D",""]
     ];
 
-    const list = document.getElementById("matchList");
-    list.innerHTML = matches.map((m,i) => `
-      <article class="match" data-i="${i}">
-        <div class="match-top">
-          <div class="week">HAFTA <b>${m.w}</b><div>${m.date}</div></div>
-          <div class="scoreline">
-            <span>${m.home}</span>
-            <span class="score">${m.hs} – ${m.as}</span>
-            <span>${m.away}</span>
-          </div>
-          <span class="res ${m.res}">${m.res === "W" ? "GALİBİYET" : m.res === "D" ? "BERABERE" : "MAĞLUBİYET"}</span>
-        </div>
-        <div class="match-body">
-          <div class="meta-row">
-            <span>📍 ${m.venue}</span>
-            <span>🧑‍⚖️ ${m.ref}</span>
-            <span>👥 Seyirci: ${m.att}</span>
-          </div>
-          <div class="goals">
-            <div>
-              <strong>${m.home}</strong>
-              <ul>${(m.homeGoals.length ? m.homeGoals : ["Gol yok"]).map(g=>`<li>⚽ ${g}</li>`).join("")}</ul>
-            </div>
-            <div>
-              <strong>${m.away}</strong>
-              <ul>${(m.awayGoals.length ? m.awayGoals : ["Gol yok"]).map(g=>`<li>⚽ ${g}</li>`).join("")}</ul>
-            </div>
-          </div>
-          ${[["Topa sahip olma %", m.stats.pos],["Şut", m.stats.shots],["Isabetli şut", m.stats.sog],["Korner", m.stats.corners]].map(([lbl,v]) => `
-            <div class="stats">
-              <div style="text-align:right;font-weight:800">${v[0]}</div>
-              <div>
-                <div class="st-lbl">${lbl}</div>
-                <div class="barwrap"><i class="lbar" style="width:${v[0]/(v[0]+v[1])*100}%"></i><i class="rbar" style="width:${v[1]/(v[0]+v[1])*100}%"></i></div>
-              </div>
-              <div style="font-weight:800">${v[1]}</div>
-            </div>`).join("")}
-          <p class="note">Şut / sahip olma değerleri tasarım özetidir. Goller, hakem ve seyirci resmi maç raporlarından alınmıştır.</p>
-        </div>
-      </article>`).join("");
+    const aliases = {
+      fenerbahce: "Fenerbahçe",
+      besiktas: "Beşiktaş",
+      galatasaray: "Galatasaray",
+      trabzonspor: "Trabzonspor",
+      konyaspor: "Konyaspor",
+      samsunspor: "Samsunspor",
+      eyupspor: "Eyüpspor",
+      gaziantep: "Gaziantep FK",
+      "gaziantep fk": "Gaziantep FK",
+      rizespor: "Çaykur Rizespor",
+      "caykur rizespor": "Çaykur Rizespor",
+      alanyaspor: "Alanyaspor",
+      goztepe: "Göztepe",
+      corum: "Çorum FK",
+      "corum fk": "Çorum FK",
+      kocaelispor: "Kocaelispor",
+      erzurum: "Erzurumspor",
+      "erzurum bb": "Erzurumspor",
+      "istanbul basaksehir": "Başakşehir",
+      basaksehir: "Başakşehir",
+      kasimpasa: "Kasımpaşa",
+      amed: "Amed SK",
+      "amed sfk": "Amed SK",
+      genclerbirligi: "Gençlerbirliği"
+    };
 
-    list.addEventListener("click", e => {
+    function fold(s) {
+      return (s || "")
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/ç/g,"c").replace(/ğ/g,"g").replace(/ı/g,"i").replace(/ö/g,"o").replace(/ş/g,"s").replace(/ü/g,"u")
+        .replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
+    }
+    function pretty(name) {
+      const f = fold(name);
+      for (const [k,v] of Object.entries(aliases)) if (f.includes(k)) return v;
+      return name;
+    }
+    function isFB(name) { const f = fold(name); return f.includes("fenerbahce"); }
+    function pickScore(s) {
+      if (s == null || s === "") return null;
+      if (typeof s === "object") {
+        if (s.displayValue != null && s.displayValue !== "") return s.displayValue;
+        if (s.value != null && s.value !== "") return String(Math.round(Number(s.value)));
+        return null;
+      }
+      return String(s);
+    }
+    function fmtTR(iso) {
+      try {
+        const d = new Date(iso);
+        const date = new Intl.DateTimeFormat("tr-TR", { timeZone: "Europe/Istanbul", day: "numeric", month: "short", year: "numeric" }).format(d);
+        const time = new Intl.DateTimeFormat("tr-TR", { timeZone: "Europe/Istanbul", hour: "2-digit", minute: "2-digit", hour12: false }).format(d);
+        return `${date} - ${time}`;
+      } catch { return iso; }
+    }
+    function venueTR(name) {
+      const raw = name || "";
+      const f = fold(raw);
+      const map = [
+        ["caykur", "Çaykur Didi Stadyumu"],
+        ["didi", "Çaykur Didi Stadyumu"],
+        ["saracoglu", "Şükrü Saracoğlu Stadyumu"],
+        ["chobani", "Şükrü Saracoğlu Stadyumu"],
+        ["eryaman", "Eryaman Stadyumu"],
+        ["19 mayis", "Samsun 19 Mayıs Stadyumu"],
+        ["gaziantep", "Gaziantep Stadyumu"],
+        ["rams", "Rams Park"],
+        ["ali sami", "Rams Park"],
+        ["gursel", "Gürsel Aksel Stadyumu"],
+        ["corum", "Çorum Şehir Stadyumu"],
+        ["kocaeli", "Kocaeli Stadyumu"],
+        ["karabekir", "Kazım Karabekir Stadyumu"],
+        ["fatih terim", "Başakşehir Fatih Terim Stadyumu"],
+        ["recep tayyip", "Recep Tayyip Erdoğan Stadyumu"],
+        ["papara", "Papara Park"],
+        ["tupras", "Tüpraş Stadyumu"],
+        ["diyarbakir", "Diyarbakır Stadyumu"]
+      ];
+      for (const [k, v] of map) if (f.includes(k)) return v;
+      return raw.replace(/^Estadio\s+/i, "").replace(/^Estádio\s+/i, "") || "Stadyum belli değil";
+    }
+    function statusTR(st) {
+      if (!st) return "VS";
+      if (st.state === "in") return st.displayClock || st.detail || "CANLI";
+      if (st.state === "post") return "MS";
+      return "VS";
+    }
+    function fmtClock() {
+      return new Date().toLocaleTimeString("tr-TR", { timeZone: "Europe/Istanbul", hour:"2-digit", minute:"2-digit", second:"2-digit" });
+    }
+    function statMap(stats) {
+      const m = {};
+      (stats || []).forEach(s => { m[s.name] = s.displayValue ?? s.value; });
+      return m;
+    }
+
+    let liveTimer = null;
+    let hasLive = false;
+    let lastHalf = "all";
+    let lastTableRows = [];
+    let logoMap = {};
+    const TEAM_COLORS = {
+      fenerbahce:"#1c3f94", galatasaray:"#a90432", besiktas:"#111111", trabzonspor:"#83051b",
+      konyaspor:"#047857", basaksehir:"#f59e0b", rizespor:"#1d4ed8", alanyaspor:"#ea580c",
+      goztepe:"#dc2626", kasimpasa:"#1e3a8a", gaziantep:"#b45309", samsunspor:"#dc2626",
+      eyupspor:"#7c3aed", kocaelispor:"#166534", corum:"#b91c1c", amed:"#16a34a",
+      erzurumspor:"#2563eb", genclerbirligi:"#b91c1c", roma:"#8b1e3f", "aston villa":"#7a003c",
+      slavia:"#c8102e", liverpool:"#c8102e", shakhtar:"#f5a623", lask:"#000000",
+      villarreal:"#f5e642", atletico:"#c8102e"
+    };
+    function teamColor(name) {
+      const f = fold(name);
+      const hit = Object.entries(TEAM_COLORS).find(([k]) => f.includes(k));
+      return hit ? hit[1] : "#f5c518";
+    }
+    function rememberLogos(rows) {
+      (rows || []).forEach(r => {
+        if (r.logo) logoMap[fold(r.team)] = r.logo;
+      });
+    }
+    function findLogo(name) {
+      const f = fold(name);
+      if (logoMap[f]) return logoMap[f];
+      const hit = Object.entries(logoMap).find(([k]) => f.includes(k.split(" ")[0]) || k.includes(f.split(" ")[0]));
+      return hit ? hit[1] : "";
+    }
+
+    function setPill(mode, text) {
+      const el = document.getElementById("livePill");
+      el.className = "live-pill " + (mode === "live" ? "" : mode === "cache" ? "cache" : "off");
+      el.innerHTML = `<i class="pulse"></i> ${text}`;
+    }
+
+    function parseStandings(payload) {
+      const entries = payload?.children?.[0]?.standings?.entries || [];
+      return entries.map((e, i) => {
+        const s = {};
+        (e.stats || []).forEach(st => s[st.name] = st.displayValue ?? st.value);
+        const logo = (e.team.logos && e.team.logos[0] && e.team.logos[0].href) || (e.team.id ? `https://a.espncdn.com/i/teamlogos/soccer/500/${e.team.id}.png` : "");
+        return {
+          pos: s.rank || (i + 1),
+          team: pretty(e.team.displayName),
+          logo,
+          color: teamColor(e.team.displayName),
+          p: s.gamesPlayed, w: s.wins, d: s.ties, l: s.losses,
+          gf: s.pointsFor, ga: s.pointsAgainst, gd: s.pointDifferential, pts: s.points
+        };
+      });
+    }
+    function windowAroundFB(rows, size) {
+      const list = rows || [];
+      size = size || 10;
+      if (list.length <= size) return list;
+      const i = list.findIndex(r => fold(r.team).includes("fenerbahce"));
+      if (i < 0) return list.slice(0, size);
+      const start = Math.max(0, Math.min(i - size + 1, list.length - size));
+      return list.slice(start, start + size);
+    }
+    function renderTable(rows, target) {
+      if (target === "tableBody") lastTableRows = rows || [];
+      const tb = document.getElementById(target || "tableBody");
+      if (!tb) return;
+      rememberLogos(rows);
+      const view = rows || [];
+      tb.innerHTML = view.map(r => `
+        <tr class="${fold(r.team).includes("fenerbahce") ? "fb-row" : ""}" style="--tc:${r.color || teamColor(r.team)}; ${fold(r.team).includes("fenerbahce") ? "" : `background:linear-gradient(90deg, ${r.color || teamColor(r.team)}26, transparent 58%);`}">
+          <td class="pos">${r.pos}</td>
+          <td class="team"><span class="team-cell">${r.logo ? `<img src="${r.logo}" alt="">` : ""}<span>${r.team}</span></span></td>
+          <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+          <td>${r.gf}</td><td>${r.ga}</td><td>${r.gd}</td>
+          <td class="pts">${r.pts}</td>
+        </tr>`).join("");
+    }
+
+    function renderMatches(list) {
+      const box = document.getElementById("matchList");
+      if (!list.length) {
+        box.innerHTML = `<article class="match"><div class="match-top">Henüz lig maçı verisi yok.</div></article>`;
+        return;
+      }
+      box.innerHTML = list.map((m,i) => `
+        <article class="match" data-i="${i}">
+          <div class="match-top">
+            <div class="week">${m.live ? "CANLI" : (m.comp === "uefa.champions" ? "ŞAMPİYONLAR LİGİ" : "SÜPER LİG")} <b>${m.w ? m.w + ". Hafta" : "—"}</b><div class="when">${m.date}</div></div>
+            <div class="scoreline">
+              <span class="tn home">${m.home}</span>
+              <span class="score">${m.hs ?? "–"} – ${m.as ?? "–"}</span>
+              <span class="tn away">${m.away}</span>
+            </div>
+            <span class="res ${m.res}">${m.live ? "CANLI" : m.res === "W" ? "GALİBİYET" : m.res === "D" ? "BERABERE" : m.res === "L" ? "MAĞLUBİYET" : "PLANLI"}</span>
+          </div>
+          <div class="match-body">
+            <div class="meta-row">
+              <span class="meta-chip">${venueTR(m.venue)}</span>
+              <span class="meta-chip">Hakem: ${m.ref || "—"}</span>
+              <span class="meta-chip">Seyirci: ${m.att || "—"}</span>
+              ${m.formH ? `<span class="meta-chip">Diziliş: ${m.formH} / ${m.formA || "—"}</span>` : ""}
+            </div>
+            <div class="stat-goal">
+              <div class="panel-mini">
+                <h4>Maç istatistikleri</h4>
+                ${(m.statsRows || []).map(([lbl,a,b]) => {
+                  const na = parseFloat(a), nb = parseFloat(b);
+                  const ta = (isNaN(na)?0:na), tb = (isNaN(nb)?0:nb), sum = ta+tb || 1;
+                  return `<div class="statline">
+                    <b style="text-align:right">${a}</b>
+                    <div>
+                      <div class="st-lbl">${lbl}</div>
+                      <div class="barwrap"><i class="lbar" style="width:${ta/sum*100}%"></i><i class="rbar" style="width:${tb/sum*100}%"></i></div>
+                    </div>
+                    <b>${b}</b>
+                  </div>`;
+                }).join("")}
+              </div>
+              <div class="panel-mini">
+                <h4>Gol tablosu</h4>
+                ${goalTable(m)}
+              </div>
+            </div>
+            <div class="pitch-duo">
+              <div class="panel-mini">
+                ${pitchHTML(m.formH, m.startersH, m.home)}
+                ${subHTML(m.outsH, m.insH)}
+              </div>
+              <div class="panel-mini">
+                ${pitchHTML(m.formA, m.startersA, m.away)}
+                ${subHTML(m.outsA, m.insA)}
+              </div>
+            </div>
+            <p class="note">${m.note || "ESPN maç özeti"}</p>
+          </div>
+        </article>`).join("");
+    }
+
+    document.getElementById("matchList").addEventListener("click", e => {
       const card = e.target.closest(".match");
       if (card) card.classList.toggle("open");
     });
 
-    const grid = document.getElementById("fixGrid");
-    function renderFix(half="all") {
-      grid.innerHTML = fixtures.filter(f => half==="all" || (half==="1" ? f[0]<=17 : f[0]>=18)).map((f,idx,arr) => {
+    function fxCard(f) {
+      const done = !!f[4];
+      const next = !done && fixtures.find(x => !x[4])?.[0] === f[0];
+      const logo = findLogo(f[2]);
+      const col = teamColor(f[2]);
+      return `<div class="fx ${done?"done":""} ${next?"nextfx":""}" style="--tc:${col}; box-shadow:inset 3px 0 0 ${col};">
+        <div class="w">H${f[0]}</div>
+        ${logo ? `<img src="${logo}" alt="">` : `<span></span>`}
+        <div>
+          <div class="opp">${f[2]}</div>
+          <div class="d">${f[1]}${f[4] ? " · " + f[4] : ""}</div>
+        </div>
+        <span class="ha ${f[3]}">${f[3]==="E"?"İÇ SAHA":"DEPLASMAN"}</span>
+      </div>`;
+    }
+    function renderFix() {
+      const box = document.getElementById("fixAll");
+      if (!box) return;
+      box.innerHTML = `<div class="fix-grid">${fixtures.map(fxCard).join("")}</div>`;
+    }
+    const uclFixtures = [
+      [1,"10 Eyl 2026","Roma","E","1-1"],
+      [2,"14 Eki 2026","Aston Villa","D",""],
+      [3,"20 Eki 2026","Slavia Prag","E",""],
+      [4,"4 Kas 2026","Liverpool","E",""],
+      [5,"25 Kas 2026","Shakhtar Donetsk","D",""],
+      [6,"9 Ara 2026","LASK","D",""],
+      [7,"20 Oca 2027","Villarreal","E",""],
+      [8,"27 Oca 2027","Atlético Madrid","D",""]
+    ];
+    function renderUclFix(events) {
+      const box = document.getElementById("uclFix");
+      if (!box) return;
+      const live = (events || []).filter(e => e.comp === "uefa.champions");
+      live.forEach((m, i) => { m.w = i + 1; });
+      const rows = uclFixtures.map(f => f.slice());
+      live.forEach(m => {
+        const opp = fold(isFB(m.home) ? m.away : m.home);
+        const row = rows.find(x => fold(x[2]).includes(opp.split(" ")[0]) || opp.includes(fold(x[2])));
+        if (row && (m.status === "post" || m.live) && m.hs != null && m.hs !== "–") {
+          row[4] = (isFB(m.home) ? `${m.hs}-${m.as}` : `${m.as}-${m.hs}`) + (m.live ? " (canlı)" : "");
+        }
+      });
+      const nextW = (rows.find(x => !x[4]) || [])[0];
+      box.innerHTML = `<div class="fix-grid">${rows.map(f => {
         const done = !!f[4];
-        const next = !done && fixtures.find(x => !x[4])?.[0] === f[0];
-        return `<div class="fx ${done?"done":""} ${next?"nextfx":""}">
+        const logo = findLogo(f[2]);
+        const col = teamColor(f[2]);
+        return `<div class="fx ${done?"done":""} ${f[0]===nextW?"nextfx":""}" style="--tc:${col}; box-shadow:inset 3px 0 0 ${col};">
           <div class="w">H${f[0]}</div>
+          ${logo ? `<img src="${logo}" alt="">` : `<span></span>`}
           <div>
             <div class="opp">${f[2]}</div>
             <div class="d">${f[1]}${f[4] ? " · " + f[4] : ""}</div>
           </div>
           <span class="ha ${f[3]}">${f[3]==="E"?"İÇ SAHA":"DEPLASMAN"}</span>
         </div>`;
-      }).join("");
+      }).join("")}</div>`;
     }
-    renderFix();
-    document.querySelectorAll(".tabs button").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("on"));
-        btn.classList.add("on");
-        renderFix(btn.dataset.half);
+
+    function teamRow(name) {
+      const f = fold(name);
+      return lastTableRows.find(r => fold(r.team).includes(f.split(" ")[0]) || f.includes(fold(r.team))) || null;
+    }
+    function countdownTR(iso) {
+      const t = new Date(iso) - Date.now();
+      if (t <= 0) return "Maç saati geldi";
+      const d = Math.floor(t / 86400000);
+      const h = Math.floor((t % 86400000) / 3600000);
+      const m = Math.floor((t % 3600000) / 60000);
+      if (d > 0) return `${d} gün ${h} saat ${m} dk`;
+      return `${h} saat ${m} dk`;
+    }
+    function logoBadge(name, fallback) {
+      const logo = findLogo(name) || (isFB(name) ? "https://a.espncdn.com/i/teamlogos/soccer/500/436.png" : "");
+      const col = teamColor(name);
+      return `<div class="badge" style="border-color:${col}; background:${col}22">${logo ? `<img src="${logo}" alt="">` : fallback}</div>`;
+    }
+    function renderNext(event) {
+      const box = document.getElementById("nextVs");
+      const fx = fixtures.find(x => !x[4]);
+      if (!event) {
+        const left = fx && fx[3]==="E" ? "Fenerbahçe" : (fx ? fx[2] : "Fenerbahçe");
+        const right = fx && fx[3]==="E" ? fx[2] : "Fenerbahçe";
+        box.innerHTML = fx ? `<div class="side">${logoBadge(left,"FB")}<strong>${left}</strong></div>
+          <div class="vs-mid"><span>${fx[1]}</span><b>HAFTA ${fx[0]}</b><span>${fx[3]==="E"?"İç saha":"Deplasman"}</span></div>
+          <div class="side">${logoBadge(right,"RİV")}<strong>${right}</strong></div>` : "Fikstür tamamlandı.";
+        const extra0 = document.getElementById("nextExtra");
+        if (extra0) extra0.innerHTML = "";
+        return;
+      }
+      const c = event.competitions?.[0] || {};
+      const home = (c.competitors || []).find(x => x.homeAway === "home") || {};
+      const away = (c.competitors || []).find(x => x.homeAway === "away") || {};
+      const st = c.status?.type || {};
+      const homeName = pretty(home.team?.displayName);
+      const awayName = pretty(away.team?.displayName);
+      const fbHome = isFB(homeName);
+      const opp = fbHome ? awayName : homeName;
+      const week = (fixtures.find(x => fold(x[2]).includes(fold(opp).split(" ")[0])) || [])[0] || "—";
+      const hr = teamRow(homeName);
+      const ar = teamRow(awayName);
+      document.getElementById("nextKicker").textContent = st.state === "in" ? "CANLI MAÇ" : "Sıradaki lig maçı · " + week + ". hafta";
+      const midLabel = st.state === "in" ? (c.status?.displayClock || "CANLI") : "VS";
+      const city = c.venue?.address?.city ? pretty(c.venue.address.city) : "";
+      box.innerHTML = `
+        <div class="side">
+          ${logoBadge(homeName, (home.team?.abbreviation || "EV").slice(0,3))}
+          <strong>${homeName}</strong>
+          <div class="ha-tag ha E">EV SAHİBİ${hr ? " · " + hr.pos + "." : ""}</div>
+        </div>
+        <div class="vs-mid">
+          <span>${fmtTR(event.date)}</span>
+          <b>${midLabel}</b>
+          <span class="kick">${st.state === "in" ? "Oyun devam ediyor" : "Kalan süre: " + countdownTR(event.date)}</span>
+          <span>${venueTR(c.venue?.fullName)}${city ? " · " + city : ""}</span>
+        </div>
+        <div class="side">
+          ${logoBadge(awayName, (away.team?.abbreviation || "DEP").slice(0,3))}
+          <strong>${awayName}</strong>
+          <div class="ha-tag ha D">DEPLASMAN${ar ? " · " + ar.pos + "." : ""}</div>
+        </div>
+      `;
+      const extra = document.getElementById("nextExtra");
+      extra.innerHTML = `
+        <div class="next-facts">
+          <div class="next-fact"><b>${week}. hf</b><span>Lig haftası</span></div>
+          <div class="next-fact"><b>${fbHome ? "İç saha" : "Deplasman"}</b><span>Fenerbahçe</span></div>
+          <div class="next-fact"><b>${hr ? hr.pts : "—"} / ${ar ? ar.pts : "—"}</b><span>Puan (ev / dep)</span></div>
+          <div class="next-fact"><b>${countdownTR(event.date)}</b><span>Maça kalan</span></div>
+        </div>
+        <p class="next-note">Trendyol Süper Lig · ${pretty(opp)} maçı. ${fbHome ? "Kadıköy’de" : "Deplasmanda"} oynanacak karşılaşma; skor ve kadro maç saatinde bu kartta güncellenir.</p>
+      `;
+    }
+
+    function renderScorers(payload) {
+      const box = document.getElementById("scorerList");
+      let rows = [];
+      const groups = payload?.stats || [];
+      const goals = groups.find(g => /goal/i.test(g.name || g.abbreviation || "")) || groups[0];
+      (goals?.leaders || []).slice(0, 5).forEach((g, i) => {
+        const a = g.athlete || {};
+        const team = pretty((a.team || {}).displayName || (a.team || {}).name || "");
+        rows.push({
+          rk: i + 1,
+          name: a.displayName || a.shortName || "—",
+          team,
+          goals: Math.round(Number(g.value || 0)),
+          fb: fold(team).includes("fenerbahce")
+        });
+      });
+      if (!rows.length) {
+        rows = [
+          { rk:1, name:"Mohamed Salah", team:"Trabzonspor", goals:7, fb:false },
+          { rk:2, name:"Gift Orban", team:"Amed SK", goals:7, fb:false },
+          { rk:3, name:"Vedat Muriqi", team:"Fenerbahçe", goals:6, fb:true },
+          { rk:4, name:"Victor Osimhen", team:"Galatasaray", goals:6, fb:false },
+          { rk:5, name:"Eldor Shomurodov", team:"Başakşehir", goals:6, fb:false }
+        ];
+      }
+      box.innerHTML = rows.map(r => `
+        <div class="scorer ${r.fb ? "fb" : ""}">
+          <span class="rk">${r.rk}</span>
+          <div class="nm">${r.name}<span class="tm">${r.team}</span></div>
+          <span class="gl">${r.goals}</span>
+        </div>`).join("");
+    }
+
+    function athleteStat(p, name) {
+      const cats = p?.statistics?.splits?.categories || [];
+      for (const c of cats) {
+        const hit = (c.stats || []).find(s => s.name === name);
+        if (hit) return Number(hit.value || 0);
+      }
+      return 0;
+    }
+    function renderDiscipline(roster) {
+      const athletes = roster?.athletes || [];
+      const injured = athletes.filter(p => (p.injuries || []).length || (p.status && p.status.type && p.status.type !== "active"));
+      const yel = athletes.reduce((n,p) => n + athleteStat(p, "yellowCards"), 0);
+      const red = athletes.reduce((n,p) => n + athleteStat(p, "redCards"), 0);
+      const topY = athletes.map(p => ({ n: p.displayName, y: athleteStat(p,"yellowCards") })).filter(x => x.y).sort((a,b)=>b.y-a.y)[0];
+      document.getElementById("injCount").textContent = injured.length;
+      document.getElementById("injList").textContent = injured.length
+        ? injured.map(p => p.displayName).join(", ")
+        : "Resmi sakat kaydı yok";
+      const yelNames = athletes.map(p => ({ n: playerName(p.displayName, athletes), y: athleteStat(p,"yellowCards") })).filter(x => x.y).sort((a,b)=>b.y-a.y);
+      const redNames = athletes.map(p => ({ n: playerName(p.displayName, athletes), y: athleteStat(p,"redCards") })).filter(x => x.y).sort((a,b)=>b.y-a.y);
+      document.getElementById("yelCount").textContent = yel;
+      document.getElementById("redCount").textContent = red;
+      const bits = [];
+      if (yelNames.length) bits.push("Sarı: " + yelNames.map(x => `${x.n} (${x.y})`).slice(0,3).join(", "));
+      if (redNames.length) bits.push("Kırmızı: " + redNames.map(x => `${x.n} (${x.y})`).join(", "));
+      document.getElementById("cardNote").textContent = bits.join(" · ") || "Kart yok";
+      renderClubStats(roster);
+    }
+    function renderNews(payload) {
+      const box = document.getElementById("newsList");
+      if (!box) return;
+      const fallback = [
+        { t: "Şampiyonlar Ligi fikstürümüz belli oldu", h: "https://www.fenerbahce.org/haberler/futbol/2026/8/sampiyonlar-ligi-fiksturumuz-belli-oldu" },
+        { t: "Fenerbahçe 8-0 Eyüpspor", h: "https://www.fenerbahce.org/haberler/futbol/2026/9/fenerbahce-8-0-eyupspor" },
+        { t: "İsmail Kartal maç sonu değerlendirmesi", h: "https://www.fenerbahce.org/haberler/futbol/2026/9/teknik-direktorumuz-ismail-kartal-eyupspor-macini-degerlendirdi" },
+        { t: "Kulüp haberleri", h: "https://www.fenerbahce.org/haberler/futbol" }
+      ];
+      const arts = (payload?.articles || []).filter(a => /fenerbahce|fenerbahçe|kartal|kadikoy/i.test((a.headline||"")+(a.description||"")));
+      const links = arts.slice(0,4).map(a => ({
+        t: a.headline,
+        h: (a.links && a.links.web && a.links.web.href) || a.links?.api?.news?.href || "#"
+      }));
+      const rows = (links.length ? links : fallback).slice(0,4);
+      box.innerHTML = rows.map(r => `<a href="${r.h}" target="_blank" rel="noopener">${r.t}</a>`).join("");
+    }
+
+    const PLAYER_NAMES = {
+      "marco asensio": "Marco Asensio",
+      "nathan ake": "Nathan Aké",
+      "milan skriniar": "Milan Škriniar",
+      "matteo guendouzi": "Mattéo Guendouzi",
+      "n golo kante": "N'Golo Kanté",
+      "ismail yuksek": "İsmail Yüksek",
+      "archie brown": "Archie Brown",
+      "nelson semedo": "Nélson Semedo",
+      "oguz aydin": "Oğuz Aydın",
+      "levent mercan": "Levent Mercan",
+      "mason greenwood": "Mason Greenwood",
+      "irfan can kahveci": "İrfan Can Kahveci",
+      "kerem akturkoglu": "Kerem Aktürkoğlu",
+      "vedat muriqi": "Vedat Muriqi",
+      "mert muldur": "Mert Müldür",
+      "ederson": "Ederson",
+      "romelu lukaku": "Romelu Lukaku",
+      "jayden oosterwolde": "Jayden Oosterwolde"
+    };
+    function playerName(raw, athletes) {
+      const f = fold(raw);
+      const live = (athletes || []).find(p => fold(p.displayName) === f || fold(p.displayName).includes(f));
+      if (live?.displayName) return live.displayName;
+      if (PLAYER_NAMES[f]) return PLAYER_NAMES[f];
+      return String(raw || "").split(/\s+/).map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : "").join(" ");
+    }
+    const PASS_PCT = {
+      "nathan ake": 95.0, "milan skriniar": 92.3, "matteo guendouzi": 91.6, "n golo kante": 90.7,
+      "marco asensio": 89.8, "ismail yuksek": 89.0, "archie brown": 87.7, "nelson semedo": 85.6,
+      "oguz aydin": 85.0, "levent mercan": 85.2, "mason greenwood": 83.7, "irfan can kahveci": 82.4,
+      "kerem akturkoglu": 81.8, "vedat muriqi": 81.2, "mert muldur": 80.5, "ederson": 75.5
+    };
+    const PASS_PG = {
+      "milan skriniar": 64.2, "nathan ake": 59.7, "matteo guendouzi": 48.9, "n golo kante": 47.2,
+      "mason greenwood": 41.0
+    };
+    function listBoard(id, rows, suffix) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = (rows.length ? rows : [{rk:1,name:"Veri yok",val:"—"}]).map(r =>
+        `<div class="club-row"><span>${r.rk}</span><span>${r.name}</span><b>${r.val}${suffix||""}</b></div>`
+      ).join("");
+    }
+    function renderClubStats(roster) {
+      const athletes = roster?.athletes || [];
+      const goals = athletes.map(p => ({ name: p.displayName, val: athleteStat(p,"totalGoals") }))
+        .filter(x => x.val > 0).sort((a,b)=>b.val-a.val).slice(0,5)
+        .map((x,i)=>({rk:i+1,name:playerName(x.name, athletes),val:x.val}));
+      const ast = athletes.map(p => ({ name: p.displayName, val: athleteStat(p,"goalAssists") }))
+        .filter(x => x.val > 0).sort((a,b)=>b.val-a.val).slice(0,5)
+        .map((x,i)=>({rk:i+1,name:playerName(x.name, athletes),val:x.val}));
+      const pct = Object.entries(PASS_PCT).sort((a,b)=>b[1]-a[1]).slice(0,5)
+        .map(([k,v],i)=>({rk:i+1,name:playerName(k, athletes),val:v}));
+      const pg = Object.entries(PASS_PG).sort((a,b)=>b[1]-a[1]).slice(0,5)
+        .map(([k,v],i)=>({rk:i+1,name:playerName(k, athletes),val:v}));
+      if (!goals.length) {
+        goals.push(...[
+          {rk:1,name:"Vedat Muriqi",val:6},{rk:2,name:"Mason Greenwood",val:4},
+          {rk:3,name:"İrfan Can Kahveci",val:1},{rk:4,name:"Matteo Guendouzi",val:1},
+          {rk:5,name:"Milan Škriniar",val:1}
+        ]);
+      }
+      if (!ast.length) {
+        ast.push(...[
+          {rk:1,name:"İrfan Can Kahveci",val:3},{rk:2,name:"Mason Greenwood",val:2},
+          {rk:3,name:"Oğuz Aydın",val:2},{rk:4,name:"Vedat Muriqi",val:1},
+          {rk:5,name:"Archie Brown",val:1}
+        ]);
+      }
+      listBoard("fbGoals", goals);
+      listBoard("fbAst", ast);
+      listBoard("fbPass", pct, "%");
+      listBoard("fbPassPg", pg);
+    }
+
+    function rateLine(label, n, total) {
+      const p = total ? Math.round(n / total * 100) : 0;
+      return `<div class="rate-row"><div class="lab"><span>${label}</span><b>${p}% · ${n}/${total}</b></div><div class="ratebar"><i style="width:${p}%"></i></div></div>`;
+    }
+    function renderRates(played) {
+      const done = (played || []).filter(m => m.status === "post" && m.hs != null && m.hs !== "–");
+      const t = done.length || 1;
+      const w = done.filter(m => m.res === "W").length;
+      const d = done.filter(m => m.res === "D").length;
+      const l = done.filter(m => m.res === "L").length;
+      const ms = document.getElementById("rateMS");
+      const iy = document.getElementById("rateIY");
+      const tg = document.getElementById("rateTG");
+      const tm = document.getElementById("rateTM");
+      if (ms) ms.innerHTML = rateLine("Galibiyet", w, done.length) + rateLine("Beraberlik", d, done.length) + rateLine("Mağlubiyet", l, done.length);
+      const ht = done.filter(m => m.htH != null);
+      let hw=0, hd=0, hl=0;
+      ht.forEach(m => {
+        const fb = isFB(m.home) ? m.htH : m.htA;
+        const opp = isFB(m.home) ? m.htA : m.htH;
+        if (fb > opp) hw++; else if (fb < opp) hl++; else hd++;
+      });
+      if (iy) iy.innerHTML = ht.length
+        ? rateLine("İY galibiyet", hw, ht.length) + rateLine("İY beraberlik", hd, ht.length) + rateLine("İY mağlubiyet", hl, ht.length)
+        : `<div class="sub">İlk yarı verisi bekleniyor</div>`;
+      const totals = done.map(m => (+m.hs || 0) + (+m.as || 0));
+      const n = totals.length || 1;
+      if (tg) tg.innerHTML =
+        rateLine("Üst 1.5", totals.filter(x => x > 1.5).length, totals.length) +
+        rateLine("Üst 2.5", totals.filter(x => x > 2.5).length, totals.length) +
+        rateLine("Üst 3.5", totals.filter(x => x > 3.5).length, totals.length);
+      const bins = [["0-15",0],["16-30",0],["31-45",0],["46-60",0],["61-75",0],["76-90+",0]];
+      const mins = done.flatMap(m => m.fbMins || []);
+      mins.forEach(min => {
+        if (min <= 15) bins[0][1]++; else if (min <= 30) bins[1][1]++;
+        else if (min <= 45) bins[2][1]++; else if (min <= 60) bins[3][1]++;
+        else if (min <= 75) bins[4][1]++; else bins[5][1]++;
+      });
+      if (tm) tm.innerHTML = mins.length
+        ? bins.map(([lab,c]) => rateLine(lab + " dk", c, mins.length)).join("")
+        : `<div class="sub">Gol dakikası henüz yok</div>`;
+    }
+
+    function applyForm(events) {
+      const form = [];
+      events.filter(e => e.status === "post").slice(0, 8).reverse().forEach(e => {
+        form.push(e.res);
+      });
+      document.getElementById("formRow").innerHTML = form.map(r =>
+        `<span class="dot ${r}">${r === "W" ? "G" : r === "D" ? "B" : "M"}</span>`
+      ).join("");
+    }
+
+    async function jget(url) {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }
+
+    function cleanName(text) {
+      return (text || "").replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+(Goal|Penalty - Scored|Own Goal|Yellow Card|Red Card|Substitution).*$/i, "").replace(/\s+at\s+\d+.*$/i, "").trim();
+    }
+    function numStat(v, asPct) {
+      if (v == null || v === "") return "—";
+      const n = parseFloat(v);
+      if (Number.isNaN(n)) return v;
+      if (asPct) return String(n <= 1 ? Math.round(n * 100) : Math.round(n * 10) / 10);
+      return Number.isInteger(n) ? String(n) : String(Math.round(n * 10) / 10);
+    }
+    function parseRoster(block) {
+      const form = block?.formation || "";
+      const people = block?.roster || [];
+      const starters = people.filter(p => p.starter).map(p => ({
+        place: +p.formationPlace || 0,
+        jersey: p.jersey || "",
+        name: p.athlete?.displayName || "",
+        short: (p.athlete?.shortName || p.athlete?.displayName || "").split(" ").slice(-1)[0],
+        out: !!p.subbedOut
+      }));
+      const xi = starters.sort((a,b) => a.place - b.place).map(p => `<b>${p.jersey}</b>${p.name}`);
+      const outs = people.filter(p => p.starter && p.subbedOut).map(p => `<b>${p.jersey || ""}</b> ${p.athlete?.displayName || ""}`);
+      const ins = people.filter(p => p.subbedIn).map(p => `<b>${p.jersey || ""}</b> ${p.athlete?.displayName || ""}`);
+      return { form, xi, starters, outs, ins };
+    }
+    const FORM_MAP = {
+      "4-2-3-1": [[1],[2,5,6,3],[4,8],[11,10,7],[9]],
+      "4-3-3": [[1],[2,5,6,3],[4,8,10],[11,9,7]],
+      "4-4-2": [[1],[2,5,6,3],[7,4,8,11],[9,10]],
+      "4-1-4-1": [[1],[2,5,6,3],[4],[7,8,10,11],[9]],
+      "3-5-2": [[1],[5,6,4],[2,8,10,11,3],[9,7]],
+      "3-4-3": [[1],[5,6,4],[2,8,10,3],[11,9,7]],
+      "5-3-2": [[1],[2,5,6,4,3],[8,10,11],[9,7]],
+      "4-2-2-2": [[1],[2,5,6,3],[4,8],[11,7],[9,10]]
+    };
+    function pitchHTML(form, starters, team) {
+      const rows = FORM_MAP[form] || [[1],[2,5,6,3],[4,8,10],[11,9,7]];
+      const by = {};
+      (starters || []).forEach(p => { if (p.place) by[p.place] = p; });
+      const nodes = rows.map(row => `<div class="pline">${row.map(pl => {
+        const p = by[pl];
+        if (!p) return `<div class="pnode empty"></div>`;
+        return `<div class="pnode ${p.out ? "out" : ""}"><i>${p.jersey || ""}</i><span>${p.short || p.name || ""}</span></div>`;
+      }).join("")}</div>`).join("");
+      return `<div class="pitch"><div class="pitch-name">${team || ""} · ${form || ""}</div>${nodes}</div>`;
+    }
+    function subHTML(outs, ins) {
+      if (!(outs && outs.length) && !(ins && ins.length)) return "";
+      return `<div class="subs">
+        ${(outs || []).map(p => `<div class="sub out"><span class="arr">▼</span>${p}</div>`).join("")}
+        ${(ins || []).map(p => `<div class="sub in"><span class="arr">▲</span>${p}</div>`).join("")}
+      </div>`;
+    }
+    function goalTable(m) {
+      const goals = (m.timeline || []).filter(ev => ev.tag === "Gol" || ev.tag === "Penaltı" || ev.tag === "KK");
+      if (!goals.length) return `<p class="sub">Gol kaydı yok</p>`;
+      return `<table class="goal-tbl">${goals.map(g => `<tr><td class="tl-min">${g.min}</td><td>${g.who}</td><td><span class="tl-tag ${g.kind||""}">${g.tag}</span></td></tr>`).join("")}</table>`;
+    }
+    async function matchDetail(id, league) {
+      const lg = league || "tur.1";
+      const d = await jget(`${ESPN}/site/v2/sports/soccer/${lg}/summary?event=${id}`);
+      const teams = d.boxscore?.teams || [];
+      const homeT = teams.find(t => t.homeAway === "home") || teams[0] || {};
+      const awayT = teams.find(t => t.homeAway === "away") || teams[1] || {};
+      const hs = statMap(homeT.statistics);
+      const as = statMap(awayT.statistics);
+      const homeName = fold(homeT.team?.displayName);
+      const timeline = [];
+      let htH = 0, htA = 0;
+      const fbMins = [];
+      const parseMin = s => {
+        const m = String(s || "").match(/(\d+)/);
+        return m ? +m[1] : 99;
       };
+      (d.keyEvents || []).forEach(ev => {
+        const typ = (ev.type?.text || "").toLowerCase();
+        const raw = ev.text || "";
+        let tag = "", kind = "";
+        if (ev.scoringPlay || typ.includes("goal") || typ.includes("penalty")) {
+          tag = typ.includes("penalty") ? "Penaltı" : typ.includes("own") ? "KK" : "Gol";
+          kind = typ.includes("penalty") ? "pen" : "";
+          const minute = parseMin(ev.clock?.displayValue);
+          const isHome = fold(ev.team?.displayName) === homeName;
+          if (minute <= 45) { if (isHome) htH++; else htA++; }
+          if (isFB(ev.team?.displayName)) fbMins.push(minute);
+        } else if (typ.includes("yellow")) { tag = "Sarı"; kind = "card"; }
+        else if (typ.includes("red")) { tag = "Kırmızı"; kind = "red"; }
+        else if (typ.includes("substitution")) { tag = "Değişiklik"; kind = "sub"; }
+        else return;
+        const team = pretty(ev.team?.displayName || "");
+        const who = [cleanName(raw) || ev.type?.text, team ? `(${team})` : ""].filter(Boolean).join(" ");
+        timeline.push({ min: ev.clock?.displayValue || "—", who, tag, kind });
+      });
+      const officials = (d.gameInfo?.officials || []).map(o => (o.displayName || "").replace("Saglam","Sağlam").replace("Meler","Meler")).join(", ");
+      const att = d.gameInfo?.attendance ? d.gameInfo.attendance.toLocaleString("tr-TR") : "—";
+      const rh = parseRoster((d.rosters || []).find(r => r.homeAway === "home"));
+      const ra = parseRoster((d.rosters || []).find(r => r.homeAway === "away"));
+      return {
+        venue: d.gameInfo?.venue?.fullName || "—",
+        ref: officials || "—",
+        att,
+        timeline,
+        htH, htA, fbMins,
+        formH: rh.form, formA: ra.form,
+        xiH: rh.xi, xiA: ra.xi,
+        startersH: rh.starters, startersA: ra.starters,
+        outsH: rh.outs, insH: rh.ins,
+        outsA: ra.outs, insA: ra.ins,
+        statsRows: [
+          ["Topa sahip olma %", numStat(hs.possessionPct, true), numStat(as.possessionPct, true)],
+          ["Şut", numStat(hs.totalShots), numStat(as.totalShots)],
+          ["Isabetli şut", numStat(hs.shotsOnTarget), numStat(as.shotsOnTarget)],
+          ["Korner", numStat(hs.wonCorners), numStat(as.wonCorners)],
+          ["Pas isabeti %", numStat(hs.passPct, true), numStat(as.passPct, true)],
+          ["Faul", numStat(hs.foulsCommitted), numStat(as.foulsCommitted)],
+          ["Sarı kart", numStat(hs.yellowCards), numStat(as.yellowCards)],
+          ["Kurtarış", numStat(hs.saves), numStat(as.saves)]
+        ],
+        note: "Kaynak: ESPN maç özeti · goller ve 11'ler canlı çekilir"
+      };
+    }
+
+    function parseScheduleEvent(e) {
+      const c = e.competitions?.[0] || {};
+      const home = (c.competitors || []).find(x => x.homeAway === "home") || {};
+      const away = (c.competitors || []).find(x => x.homeAway === "away") || {};
+      const st = c.status?.type || {};
+      const hs = pickScore(home.score);
+      const as = pickScore(away.score);
+      const fbHome = isFB(home.team?.displayName);
+      let res = "";
+      if (st.state === "post" && hs != null && as != null) {
+        const fb = fbHome ? +hs : +as;
+        const opp = fbHome ? +as : +hs;
+        res = fb > opp ? "W" : fb < opp ? "L" : "D";
+      }
+      return {
+        id: e.id,
+        date: fmtTR(e.date),
+        iso: e.date,
+        home: pretty(home.team?.displayName),
+        away: pretty(away.team?.displayName),
+        hs: hs ?? "–",
+        as: as ?? "–",
+        res,
+        live: st.state === "in",
+        status: st.state,
+        venue: c.venue?.fullName,
+        w: "",
+        comp: (e.league?.slug || e.league?.abbreviation || "tur.1").includes("champion") ? "uefa.champions" : (e.league?.slug || "tur.1"),
+        homeGoals: [],
+        awayGoals: []
+      };
+    }
+
+    function overlayFixtures(parsed) {
+      parsed.forEach(m => {
+        if (m.status !== "post" && !m.live) return;
+        const opp = isFB(m.home) ? m.away : m.home;
+        const fopp = fold(opp);
+        const row = fixtures.find(x => {
+          const fo = fold(x[2]);
+          return fo === fopp || fopp.includes(fo) || fo.includes(fopp.split(" ")[0]);
+        });
+        if (row) {
+          const fbHome = isFB(m.home);
+          row[4] = (fbHome ? `${m.hs}-${m.as}` : `${m.as}-${m.hs}`) + (m.live ? " (canlı)" : "");
+          if (m.comp !== "uefa.champions") m.w = row[0];
+        }
+      });
+    }
+
+    async function refresh() {
+      try {
+        const [standings, uclStandings, team, schedule, clSchedule, roster, news] = await Promise.all([
+          jget(`${ESPN}/v2/sports/soccer/tur.1/standings`),
+          jget(`${ESPN}/v2/sports/soccer/uefa.champions/standings`),
+          jget(`${ESPN}/site/v2/sports/soccer/tur.1/teams/${TEAM}`),
+          jget(`${ESPN}/site/v2/sports/soccer/tur.1/teams/${TEAM}/schedule`),
+          jget(`${ESPN}/site/v2/sports/soccer/uefa.champions/teams/${TEAM}/schedule`),
+          jget(`${ESPN}/site/v2/sports/soccer/tur.1/teams/${TEAM}/roster`),
+          jget(`${ESPN}/site/v2/sports/soccer/tur.1/news`)
+        ]);
+
+        const rows = parseStandings(standings);
+        renderTable(rows, "tableBody");
+        renderTable(parseStandings(uclStandings), "uclBody");
+        document.getElementById("tableNote").textContent = "ESPN canlı tablo · " + fmtClock();
+        const uclNote = document.getElementById("uclNote");
+        if (uclNote) uclNote.textContent = "Lig aşaması · ESPN · " + fmtClock();
+
+        const rec = team.team?.record?.items?.[0]?.stats || [];
+        const R = {}; rec.forEach(s => R[s.name] = s.value);
+        const pos = R.rank || rows.find(r => fold(r.team).includes("fenerbahce"))?.pos || "—";
+        document.getElementById("chipPos").textContent = pos + ".";
+        document.getElementById("chipPts").textContent = R.points ?? "—";
+        document.getElementById("chipGoals").textContent = `${R.pointsFor ?? "—"}-${R.pointsAgainst ?? "—"}`;
+        document.getElementById("chipGd").textContent = (R.pointDifferential >= 0 ? "+" : "") + (R.pointDifferential ?? "—");
+        const recTotal = document.getElementById("recTotal");
+        if (recTotal) recTotal.textContent = `${R.wins ?? 0}-${R.ties ?? 0}-${R.losses ?? 0}`;
+        document.getElementById("heroKicker").textContent = `${pos}. sıra · ${R.gamesPlayed || 0} maç`;
+
+        const events = [
+          ...(schedule.events || []).map(e => Object.assign(parseScheduleEvent(e), { comp: "tur.1" })),
+          ...(clSchedule.events || []).map(e => Object.assign(parseScheduleEvent(e), { comp: "uefa.champions", w: "UCL" }))
+        ].sort((a,b) => new Date(b.iso) - new Date(a.iso));
+        hasLive = events.some(e => e.live);
+        const played = events.filter(e => e.status === "post" || e.live);
+
+        const details = await Promise.all(played.slice(0, 6).map(async m => {
+          try { return { id: m.id, extra: await matchDetail(m.id, m.comp) }; }
+          catch { return { id: m.id, extra: null }; }
+        }));
+        const extraMap = Object.fromEntries(details.map(d => [d.id, d.extra]));
+        played.forEach(m => { if (extraMap[m.id]) Object.assign(m, extraMap[m.id]); });
+
+        overlayFixtures(events);
+        const clEv = events.filter(e => e.comp === "uefa.champions").sort((a,b) => new Date(a.iso) - new Date(b.iso));
+        clEv.forEach((m, i) => { m.w = i + 1; });
+        renderUclFix(events);
+        renderMatches(played.filter(m => m.status === "post" || m.live).slice(0, 5));
+        renderRates(played);
+        if (document.getElementById("formRow")) applyForm(events);
+        renderFix();
+
+        const nextEv = team.team?.nextEvent?.[0] || events.find(e => e.status === "pre");
+        renderNext(nextEv);
+
+        const recStamp = document.getElementById("recStamp");
+        const recSource = document.getElementById("recSource");
+        if (recStamp) recStamp.textContent = fmtClock();
+        if (recSource) recSource.textContent = "ESPN tur.1 · otomatik";
+        setPill("live", hasLive ? "CANLI MAÇ" : "CANLI VERİ");
+        if (document.getElementById("injCount")) renderDiscipline(roster);
+        if (document.getElementById("newsList")) renderNews(news);
+      } catch (err) {
+        console.warn(err);
+        setPill("off", "ÇEVRİMDIŞI YEDEK");
+        const recSource2 = document.getElementById("recSource");
+        if (recSource2) recSource2.textContent = "API’ye ulaşılamadı, yedek veri";
+        if (document.getElementById("injCount")) renderDiscipline(null);
+        renderFix();
+      }
+      scheduleTimer();
+    }
+
+    function scheduleTimer() {
+      if (liveTimer) clearTimeout(liveTimer);
+      liveTimer = setTimeout(refresh, hasLive ? 20000 : 90000);
+    }
+
+    const weekComments = [
+      { who: "İsmail Kartal", src: "Maç sonu · beIN / FB.org", text: "Bu galibiyeti büyük Fenerbahçe taraftarına armağan ediyoruz." },
+      { who: "İsmail Kartal", src: "Maç sonu · Habertürk", text: "Bu kadar farklı kazanacağımızı tahmin etmiyorduk ama kazanacağımızı tahmin ediyorduk." },
+      { who: "İsmail Kartal", src: "Maç sonu · Ajansspor", text: "Geçmişte verilmeyen penaltılarla alamadığımız 4 puanımız var. O puanları alsak bugün ligin lideriydik." },
+      { who: "İsmail Kartal", src: "Maç sonu · Evrensel", text: "Bugüne kadar vurduğumuz toplar direkten dönüyordu. Bugün çok şükür vurduğumuz toplar gol oldu." },
+      { who: "Mason Greenwood", src: "Maç sonu · Ajansspor", text: "8 gol attık. Bu harika ama daha fazla da olabilirdi. Takımın gösterdiği performanstan mutluyum." },
+      { who: "Fanatik", src: "Köşe · 21 Eylül 2026", text: "Fenerbahçe neredeyse sezonun tüm hıncını alıyormuşçasına oynadı. Buna ihtiyacı vardı." },
+      { who: "Hilmi Türkay", src: "Cumhuriyet Spor", text: "Bu galibiyete fazla anlam yüklememek gerekse de Sarı-Lacivertliler için enseyi erkenden karartmanın da lüzumu yok. Moral önemli." },
+      { who: "Serkan Akcan", src: "Milliyet", text: "Gaziantep sonrası Vedat ile sahaya çıkmak farkı yaratan en önemli detaydı. Kısaca Fenerbahçe’nin böyle bir galibiyete ihtiyacı vardı." },
+      { who: "Ömer Üründül", src: "Halk TV / köşe", text: "İlk 20 dakikada maç bitmişti. Skorun büyüklüğüne rağmen kadro yönetiminde soru işaretleri duruyor." },
+      { who: "Ersin Düzen", src: "NOW Spor maç sonu", text: "Kerem’in bu maçın hikâyesinin bir parçası olması gerekirdi." }
+    ];
+    let yorumI = 0;
+    let yorumTimer = null;
+    function paintYorum(i) {
+      yorumI = (i + weekComments.length) % weekComments.length;
+      const c = weekComments[yorumI];
+      document.getElementById("yorumLine").innerHTML = "<b>" + c.who + ":</b> " + c.text;
+      document.getElementById("yorumSrc").textContent = c.src + " · 6. hafta";
+      document.getElementById("yorumIdx").textContent = (yorumI + 1) + "/" + weekComments.length;
+      document.getElementById("yorumDots").innerHTML = weekComments.map((_, n) => "<i class=\"" + (n === yorumI ? "on" : "") + "\" data-n=\"" + n + "\"></i>").join("");
+    }
+    document.getElementById("yorumDots").addEventListener("click", e => {
+      const n = e.target.dataset.n;
+      if (n == null) return;
+      paintYorum(+n);
+    });
+    function startYorum() {
+      paintYorum(0);
+      if (yorumTimer) clearInterval(yorumTimer);
+      yorumTimer = setInterval(() => paintYorum(yorumI + 1), 8000);
+    }
+    startYorum();
+    renderClubStats(null);
+    if (document.getElementById("newsList")) renderNews(null);
+
+    renderFix();
+    refresh();
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) refresh();
     });
   </script>
+
 </body>
 </html>
