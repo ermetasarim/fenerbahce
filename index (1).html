@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fenerbahçe 2026–27 · Lig Merkezi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #06142b;
+      --navy-2: #0b1f42;
+      --navy-3: #122a54;
+      --gold: #f5c518;
+      --gold-2: #ffe27a;
+      --yellow: #ffd200;
+      --ink: #e8eef8;
+      --muted: #9db0c9;
+      --win: #2ee59d;
+      --draw: #f0c14b;
+      --loss: #ff5d6c;
+      --line: rgba(245, 197, 24, .18);
+      --card: rgba(12, 32, 68, .72);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Manrope, system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(245,197,24,.16), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(18,60,140,.35), transparent 50%),
+        linear-gradient(180deg, #040c1c 0%, #06142b 40%, #081830 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1240px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 12, 28, .72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .crest {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: conic-gradient(from 180deg, #0b2a6b, #f5c518, #0b2a6b);
+      display: grid; place-items: center;
+      box-shadow: 0 0 0 2px rgba(245,197,24,.35);
+    }
+    .crest span {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #081830; display: grid; place-items: center;
+      font-family: Bebas Neue, sans-serif; color: var(--gold); font-size: 18px; letter-spacing: .5px;
+    }
+    .brand h1 { font-size: 15px; font-weight: 800; letter-spacing: .4px; }
+    .brand p { font-size: 11px; color: var(--muted); }
+    nav.links { display: flex; gap: 6px; flex-wrap: wrap; }
+    nav.links a {
+      font-size: 12px; font-weight: 700; letter-spacing: .3px;
+      padding: 8px 12px; border-radius: 999px; color: var(--muted);
+      border: 1px solid transparent;
+    }
+    nav.links a:hover { color: var(--gold-2); border-color: var(--line); background: rgba(245,197,24,.06); }
+
+    .hero {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 28px;
+      margin: 22px 0 28px;
+      background:
+        linear-gradient(120deg, rgba(6,20,43,.88), rgba(6,20,43,.45) 55%, rgba(6,20,43,.7)),
+        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1600&q=70') center/cover;
+      min-height: 280px; padding: 36px 32px;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 90px;
+      background: linear-gradient(transparent, rgba(6,20,43,.9));
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--gold); background: rgba(245,197,24,.12);
+      border: 1px solid rgba(245,197,24,.28); padding: 6px 10px; border-radius: 999px;
+    }
+    .hero h2 {
+      font-family: Bebas Neue, sans-serif; font-size: clamp(42px, 7vw, 78px);
+      line-height: .9; margin: 14px 0 10px; letter-spacing: 1px;
+    }
+    .hero h2 em { color: var(--gold); font-style: normal; }
+    .hero .lead { max-width: 560px; color: #d5e0f0; font-size: 15px; }
+    .hero-meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 22px; position: relative; z-index: 1; }
+    .chip {
+      background: rgba(8,24,48,.7); border: 1px solid var(--line);
+      padding: 10px 14px; border-radius: 14px; min-width: 110px;
+    }
+    .chip b { display: block; font-size: 20px; }
+    .chip span { font-size: 11px; color: var(--muted); }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px;
+    }
+    .stat .lbl { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+    .stat .val { font-family: Bebas Neue, sans-serif; font-size: 38px; line-height: 1; margin-top: 6px; }
+    .stat .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .form { display: flex; gap: 6px; margin-top: 10px; }
+    .dot { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #06142b; }
+    .dot.W { background: var(--win); } .dot.D { background: var(--draw); } .dot.L { background: var(--loss); }
+
+    section { margin-bottom: 36px; }
+    .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .sec-head h3 { font-family: Bebas Neue, sans-serif; font-size: 32px; letter-spacing: .6px; }
+    .sec-head p { color: var(--muted); font-size: 13px; }
+
+    .panel {
+      background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 11px 12px; text-align: left; font-size: 13px; }
+    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); }
+    tbody tr:hover { background: rgba(245,197,24,.05); }
+    .pos { width: 36px; font-weight: 800; color: var(--gold); }
+    .team { font-weight: 700; }
+    .fb-row { background: linear-gradient(90deg, rgba(245,197,24,.16), transparent 70%); }
+    .fb-row td { color: #fff; }
+    .pts { font-weight: 800; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 12px 16px; color: var(--muted); font-size: 11px; }
+    .lg { display: flex; align-items: center; gap: 6px; }
+    .bar { width: 10px; height: 10px; border-radius: 2px; }
+    .cl { background: #4ea8ff; } .el { background: #7a5cff; } .conf { background: #2ee59d; } .rel { background: #ff5d6c; }
+
+    .next {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-bottom: 28px;
+    }
+    .next-card {
+      background:
+        linear-gradient(160deg, rgba(245,197,24,.12), rgba(12,32,68,.8)),
+        var(--navy-2);
+      border: 1px solid var(--line); border-radius: 22px; padding: 22px;
+    }
+    .vs { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+    .side { text-align: center; flex: 1; }
+    .badge {
+      width: 64px; height: 64px; margin: 0 auto 8px; border-radius: 50%;
+      display: grid; place-items: center; font-family: Bebas Neue, sans-serif; font-size: 22px;
+      background: #0a1c3a; border: 2px solid var(--gold);
+    }
+    .vs-mid { text-align: center; color: var(--muted); }
+    .vs-mid b { display: block; color: var(--gold); font-family: Bebas Neue, sans-serif; font-size: 28px; }
+
+    .matches { display: grid; gap: 12px; }
+    .match {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+    }
+    .match-top {
+      display: grid; grid-template-columns: 90px 1fr auto; gap: 12px; align-items: center;
+      padding: 14px 16px; cursor: pointer;
+    }
+    .week { font-size: 11px; color: var(--muted); font-weight: 700; }
+    .week b { display: block; color: var(--gold); font-size: 16px; }
+    .scoreline { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .score {
+      min-width: 72px; text-align: center; font-family: Bebas Neue, sans-serif; font-size: 28px;
+      background: #081830; border-radius: 10px; padding: 2px 10px; border: 1px solid var(--line);
+    }
+    .res { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; }
+    .res.W { background: rgba(46,229,157,.15); color: var(--win); }
+    .res.D { background: rgba(240,193,75,.15); color: var(--draw); }
+    .res.L { background: rgba(255,93,108,.15); color: var(--loss); }
+    .match-body { display: none; padding: 0 16px 16px; border-top: 1px solid rgba(255,255,255,.05); }
+    .match.open .match-body { display: block; }
+    .meta-row { display: flex; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 12px; padding: 12px 0; }
+    .goals { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .goals ul { list-style: none; font-size: 13px; }
+    .goals li { padding: 4px 0; }
+    .stats {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center;
+      margin-top: 12px;
+    }
+    .st-lbl { text-align: center; font-size: 11px; color: var(--muted); }
+    .barwrap { height: 7px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; display: flex; }
+    .barwrap i { height: 100%; }
+    .lbar { background: var(--gold); }
+    .rbar { background: #4ea8ff; margin-left: auto; }
+    .note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+    .tabs { display: flex; gap: 8px; }
+    .tabs button {
+      background: transparent; color: var(--muted); border: 1px solid var(--line);
+      border-radius: 999px; padding: 7px 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+    }
+    .tabs button.on { color: #06142b; background: var(--gold); border-color: var(--gold); }
+
+    .fix-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .fx {
+      display: grid; grid-template-columns: 54px 1fr auto; gap: 10px; align-items: center;
+      padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(8,24,48,.45);
+    }
+    .fx.done { opacity: .78; }
+    .fx.nextfx { border-color: rgba(245,197,24,.55); box-shadow: 0 0 0 1px rgba(245,197,24,.18) inset; }
+    .fx .w { font-size: 11px; color: var(--gold); font-weight: 800; }
+    .fx .opp { font-size: 13px; font-weight: 700; }
+    .fx .d { font-size: 11px; color: var(--muted); }
+    .ha { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 999px; }
+    .ha.E { background: rgba(245,197,24,.16); color: var(--gold); }
+    .ha.D { background: rgba(78,168,255,.14); color: #9fd0ff; }
+
+    footer { color: var(--muted); font-size: 12px; padding: 28px 0 40px; border-top: 1px solid var(--line); }
+    @media (max-width: 900px) {
+      .grid-4, .next, .fix-grid, .goals { grid-template-columns: 1fr; }
+      .match-top { grid-template-columns: 1fr; }
+      nav.links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="crest"><span>FB</span></div>
+        <div>
+          <h1>FENERBAHÇE 2026–27</h1>
+          <p>Trendyol Süper Lig · Lig Merkezi</p>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="#ozet">Özet</a>
+        <a href="#tablo">Puan Durumu</a>
+        <a href="#maclar">Oynanan Maçlar</a>
+        <a href="#fikstur">Fikstür</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="ozet">
+      <span class="kicker">Kadıköy · 6. hafta sonrası</span>
+      <h2>SARI LACİVERT<br><em>LİG MERKEZİ</em></h2>
+      <p class="lead">2026–27 Trendyol Süper Lig sezonunda Fenerbahçe’nin fikstürü, güncel puan durumu ve oynanan maç istatistikleri tek ekranda.</p>
+      <div class="hero-meta">
+        <div class="chip"><b>6.</b><span>Sıra</span></div>
+        <div class="chip"><b>10</b><span>Puan</span></div>
+        <div class="chip"><b>16-6</b><span>Gol / Yenilen</span></div>
+        <div class="chip"><b>+10</b><span>Averaj</span></div>
+      </div>
+    </section>
+
+    <div class="grid-4">
+      <article class="stat">
+        <div class="lbl">Sezon karnesi</div>
+        <div class="val">3-1-2</div>
+        <div class="sub">Galibiyet · Beraberlik · Mağlubiyet</div>
+        <div class="form">
+          <span class="dot L">M</span><span class="dot W">G</span><span class="dot W">G</span>
+          <span class="dot L">M</span><span class="dot D">B</span><span class="dot W">G</span>
+        </div>
+      </article>
+      <article class="stat">
+        <div class="lbl">İç saha</div>
+        <div class="val">2-0-1</div>
+        <div class="sub">13 gol / 4 yenilen · +9</div>
+      </article>
+      <article class="stat">
+        <div class="lbl">Deplasman</div>
+        <div class="val">1-1-1</div>
+        <div class="sub">3 gol / 2 yenilen · +1</div>
+      </article>
+      <article class="stat">
+        <div class="lbl">Gol kralı (lig)</div>
+        <div class="val">MURIQI</div>
+        <div class="sub">6 gol · Greenwood 4 · Lukaku 2</div>
+      </article>
+    </div>
+
+    <div class="next">
+      <article class="next-card">
+        <span class="kicker">Sıradaki lig maçı · 7. hafta</span>
+        <div class="vs">
+          <div class="side">
+            <div class="badge">RIZ</div>
+            <strong>Ç. Rizespor</strong>
+            <div class="d" style="color:var(--muted);font-size:12px;margin-top:4px">Deplasman</div>
+          </div>
+          <div class="vs-mid">
+            <span>10 Ekim 2026</span>
+            <b>19:00</b>
+            <span>Çaykur Didi Stadyumu</span>
+          </div>
+          <div class="side">
+            <div class="badge">FB</div>
+            <strong>Fenerbahçe</strong>
+            <div class="d" style="color:var(--muted);font-size:12px;margin-top:4px">Misafir</div>
+          </div>
+        </div>
+      </article>
+      <article class="next-card">
+        <span class="kicker">Sezon notu</span>
+        <h3 style="font-family:Bebas Neue;font-size:34px;margin:10px 0 8px">EN FARKLI GALİBİYET</h3>
+        <p style="font-size:22px;font-weight:800">Fenerbahçe 8–0 Eyüpspor</p>
+        <p style="color:var(--muted);margin-top:8px;font-size:13px">20 Eylül 2026 · Şükrü Saracoğlu · Muriqi 4 gol</p>
+      </article>
+    </div>
+
+    <section id="tablo">
+      <div class="sec-head">
+        <div>
+          <h3>Puan Durumu</h3>
+          <p>6. hafta sonu · 20 Eylül 2026 itibarıyla</p>
+        </div>
+      </div>
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Takım</th><th>O</th><th>G</th><th>B</th><th>M</th><th>A</th><th>Y</th><th>Av</th><th>P</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="pos">1</td><td class="team">Amed SK</td><td>6</td><td>4</td><td>1</td><td>1</td><td>15</td><td>7</td><td>+8</td><td class="pts">13</td></tr>
+            <tr><td class="pos">2</td><td class="team">Galatasaray</td><td>6</td><td>4</td><td>1</td><td>1</td><td>13</td><td>10</td><td>+3</td><td class="pts">13</td></tr>
+            <tr><td class="pos">3</td><td class="team">Beşiktaş</td><td>6</td><td>4</td><td>0</td><td>2</td><td>14</td><td>7</td><td>+7</td><td class="pts">12</td></tr>
+            <tr><td class="pos">4</td><td class="team">Kocaelispor</td><td>6</td><td>4</td><td>0</td><td>2</td><td>7</td><td>4</td><td>+3</td><td class="pts">12</td></tr>
+            <tr><td class="pos">5</td><td class="team">Alanyaspor</td><td>6</td><td>3</td><td>2</td><td>1</td><td>8</td><td>6</td><td>+2</td><td class="pts">11</td></tr>
+            <tr class="fb-row"><td class="pos">6</td><td class="team">Fenerbahçe</td><td>6</td><td>3</td><td>1</td><td>2</td><td>16</td><td>6</td><td>+10</td><td class="pts">10</td></tr>
+            <tr><td class="pos">7</td><td class="team">Trabzonspor</td><td>6</td><td>3</td><td>1</td><td>2</td><td>13</td><td>5</td><td>+8</td><td class="pts">10</td></tr>
+            <tr><td class="pos">8</td><td class="team">Kasımpaşa</td><td>6</td><td>2</td><td>4</td><td>0</td><td>7</td><td>5</td><td>+2</td><td class="pts">10</td></tr>
+            <tr><td class="pos">9</td><td class="team">Çaykur Rizespor</td><td>6</td><td>3</td><td>1</td><td>2</td><td>7</td><td>6</td><td>+1</td><td class="pts">10</td></tr>
+            <tr><td class="pos">10</td><td class="team">Gaziantep FK</td><td>6</td><td>2</td><td>2</td><td>2</td><td>7</td><td>7</td><td>0</td><td class="pts">8</td></tr>
+            <tr><td class="pos">11</td><td class="team">Çorum FK</td><td>6</td><td>2</td><td>1</td><td>3</td><td>13</td><td>12</td><td>+1</td><td class="pts">7</td></tr>
+            <tr><td class="pos">12</td><td class="team">Başakşehir</td><td>6</td><td>2</td><td>1</td><td>3</td><td>10</td><td>11</td><td>-1</td><td class="pts">7</td></tr>
+            <tr><td class="pos">13</td><td class="team">Gençlerbirliği</td><td>6</td><td>2</td><td>1</td><td>3</td><td>5</td><td>13</td><td>-8</td><td class="pts">7</td></tr>
+            <tr><td class="pos">14</td><td class="team">Erzurumspor</td><td>6</td><td>2</td><td>1</td><td>3</td><td>3</td><td>11</td><td>-8</td><td class="pts">7</td></tr>
+            <tr><td class="pos">15</td><td class="team">Konyaspor</td><td>6</td><td>1</td><td>1</td><td>4</td><td>4</td><td>8</td><td>-4</td><td class="pts">4</td></tr>
+            <tr><td class="pos">16</td><td class="team">Samsunspor</td><td>6</td><td>1</td><td>1</td><td>4</td><td>6</td><td>12</td><td>-6</td><td class="pts">4</td></tr>
+            <tr><td class="pos">17</td><td class="team">Göztepe</td><td>6</td><td>0</td><td>3</td><td>3</td><td>11</td><td>15</td><td>-4</td><td class="pts">3</td></tr>
+            <tr><td class="pos">18</td><td class="team">Eyüpspor</td><td>6</td><td>1</td><td>0</td><td>5</td><td>2</td><td>16</td><td>-14</td><td class="pts">3</td></tr>
+          </tbody>
+        </table>
+        <div class="legend">
+          <span class="lg"><i class="bar cl"></i> ŞL lig aşaması / eleme</span>
+          <span class="lg"><i class="bar el"></i> Avrupa Ligi eleme</span>
+          <span class="lg"><i class="bar conf"></i> Konferans Ligi eleme</span>
+          <span class="lg"><i class="bar rel"></i> Küme düşme hattı (16–18)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="maclar">
+      <div class="sec-head">
+        <div>
+          <h3>Oynanan Maçlar</h3>
+          <p>Kartı açarak gol dakikaları ve maç özet istatistiklerini görün</p>
+        </div>
+      </div>
+      <div class="matches" id="matchList"></div>
+    </section>
+
+    <section id="fikstur">
+      <div class="sec-head">
+        <div>
+          <h3>34 Haftalık Fikstür</h3>
+          <p>Fikstür çekimi: 9 Temmuz 2026 · 14 Ağustos 2026 – 23 Mayıs 2027</p>
+        </div>
+        <div class="tabs">
+          <button class="on" data-half="all">Tümü</button>
+          <button data-half="1">1. yarı</button>
+          <button data-half="2">2. yarı</button>
+        </div>
+      </div>
+      <div class="fix-grid" id="fixGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Veriler 20–25 Eylül 2026 itibarıyla TFF / Wikipedia / FBref özetlerinden derlenmiştir. Saatler yayıncı kuruluş güncellemesine göre değişebilir.
+      Şut ve topa sahip olma değerleri maç karakterine göre tasarım amaçlı özet istatistiklerdir; resmi TFF raporunun yerini tutmaz.
+    </div>
+  </footer>
+
+  <script>
+    const matches = [
+      {
+        w:1, date:"15 Ağu 2026 · 21:30", home:"Gençlerbirliği", away:"Fenerbahçe", hs:2, as:1, res:"L",
+        venue:"Eryaman Stadyumu, Ankara", ref:"Oğuzhan Aksu", att:"—",
+        homeGoals:["Tongya 37'","Ülgün 56'"],
+        awayGoals:["Talisca 13'","Aktürkoğlu 58'"],
+        stats:{pos:[42,58], shots:[9,14], sog:[4,5], corners:[3,7]}
+      },
+      {
+        w:2, date:"22 Ağu 2026 · 20:30", home:"Fenerbahçe", away:"Konyaspor", hs:4, as:2, res:"W",
+        venue:"Şükrü Saracoğlu, İstanbul", ref:"Atilla Karaoğlan", att:"—",
+        homeGoals:["Muriqi 7'","Greenwood 20'","Asensio 33'","Greenwood 49'"],
+        awayGoals:["Colley 10'","Türüç 45'"],
+        stats:{pos:[61,39], shots:[18,8], sog:[9,4], corners:[8,3]}
+      },
+      {
+        w:3, date:"30 Ağu 2026 · 21:30", home:"Samsunspor", away:"Fenerbahçe", hs:0, as:2, res:"W",
+        venue:"Samsun 19 Mayıs Stadyumu", ref:"Yasin Kol", att:"12.794",
+        homeGoals:[],
+        awayGoals:["Muriqi 3'","Oğuz Aydın 49'","Lukaku 70'"],
+        stats:{pos:[46,54], shots:[7,13], sog:[2,6], corners:[4,6]}
+      },
+      {
+        w:4, date:"5 Eyl 2026 · 20:00", home:"Fenerbahçe", away:"Beşiktaş", hs:1, as:2, res:"L",
+        venue:"Şükrü Saracoğlu, İstanbul", ref:"Halil Umut Meler", att:"44.935",
+        homeGoals:["Škriniar 26'"],
+        awayGoals:["R. Yılmaz 38'","Vlahović 73'"],
+        stats:{pos:[57,43], shots:[15,11], sog:[4,5], corners:[7,4]}
+      },
+      {
+        w:5, date:"14 Eyl 2026 · 20:00", home:"Gaziantep FK", away:"Fenerbahçe", hs:0, as:0, res:"D",
+        venue:"Gaziantep Stadyumu", ref:"Mehmet Türkmen", att:"13.321",
+        homeGoals:[], awayGoals:[],
+        stats:{pos:[38,62], shots:[6,16], sog:[1,4], corners:[2,9]}
+      },
+      {
+        w:6, date:"20 Eyl 2026 · 17:00", home:"Fenerbahçe", away:"Eyüpspor", hs:8, as:0, res:"W",
+        venue:"Şükrü Saracoğlu, İstanbul", ref:"Kadir Sağlam", att:"—",
+        homeGoals:["Greenwood 4' (p)","Muriqi 7'","Muriqi 21'","Guendouzi 38'","Kahveci 45+1'","Muriqi 47'","Muriqi 55'","Greenwood 80'","Lukaku 89'"],
+        awayGoals:[],
+        stats:{pos:[72,28], shots:[24,3], sog:[14,1], corners:[11,1]}
+      }
+    ];
+
+    const fixtures = [
+      [1,"15 Ağu 2026","Gençlerbirliği","D","2-1"],
+      [2,"22 Ağu 2026","Konyaspor","E","4-2"],
+      [3,"30 Ağu 2026","Samsunspor","D","2-0"],
+      [4,"5 Eyl 2026","Beşiktaş","E","1-2"],
+      [5,"14 Eyl 2026","Gaziantep FK","D","0-0"],
+      [6,"20 Eyl 2026","Eyüpspor","E","8-0"],
+      [7,"10 Eki 2026","Çaykur Rizespor","D",""],
+      [8,"17 Eki 2026","Alanyaspor","E",""],
+      [9,"26 Eki 2026","Galatasaray","D",""],
+      [10,"31 Eki 2026","Göztepe","E",""],
+      [11,"8 Kas 2026","Çorum FK","D",""],
+      [12,"21 Kas 2026","Kocaelispor","D",""],
+      [13,"29 Kas 2026","Erzurumspor","E",""],
+      [14,"5 Ara 2026","Başakşehir","D",""],
+      [15,"13 Ara 2026","Trabzonspor","E",""],
+      [16,"18 Ara 2026","Kasımpaşa","D",""],
+      [17,"17 Oca 2027","Amed SK","E",""],
+      [18,"24 Oca 2027","Gençlerbirliği","E",""],
+      [19,"31 Oca 2027","Konyaspor","D",""],
+      [20,"7 Şub 2027","Samsunspor","E",""],
+      [21,"14 Şub 2027","Beşiktaş","D",""],
+      [22,"21 Şub 2027","Gaziantep FK","E",""],
+      [23,"28 Şub 2027","Eyüpspor","D",""],
+      [24,"7 Mar 2027","Çaykur Rizespor","E",""],
+      [25,"14 Mar 2027","Alanyaspor","D",""],
+      [26,"21 Mar 2027","Galatasaray","E",""],
+      [27,"4 Nis 2027","Göztepe","D",""],
+      [28,"11 Nis 2027","Çorum FK","E",""],
+      [29,"18 Nis 2027","Kocaelispor","E",""],
+      [30,"25 Nis 2027","Erzurumspor","D",""],
+      [31,"2 May 2027","Başakşehir","E",""],
+      [32,"9 May 2027","Trabzonspor","D",""],
+      [33,"16 May 2027","Kasımpaşa","E",""],
+      [34,"23 May 2027","Amed SK","D",""]
+    ];
+
+    const list = document.getElementById("matchList");
+    list.innerHTML = matches.map((m,i) => `
+      <article class="match" data-i="${i}">
+        <div class="match-top">
+          <div class="week">HAFTA <b>${m.w}</b><div>${m.date}</div></div>
+          <div class="scoreline">
+            <span>${m.home}</span>
+            <span class="score">${m.hs} – ${m.as}</span>
+            <span>${m.away}</span>
+          </div>
+          <span class="res ${m.res}">${m.res === "W" ? "GALİBİYET" : m.res === "D" ? "BERABERE" : "MAĞLUBİYET"}</span>
+        </div>
+        <div class="match-body">
+          <div class="meta-row">
+            <span>📍 ${m.venue}</span>
+            <span>🧑‍⚖️ ${m.ref}</span>
+            <span>👥 Seyirci: ${m.att}</span>
+          </div>
+          <div class="goals">
+            <div>
+              <strong>${m.home}</strong>
+              <ul>${(m.homeGoals.length ? m.homeGoals : ["Gol yok"]).map(g=>`<li>⚽ ${g}</li>`).join("")}</ul>
+            </div>
+            <div>
+              <strong>${m.away}</strong>
+              <ul>${(m.awayGoals.length ? m.awayGoals : ["Gol yok"]).map(g=>`<li>⚽ ${g}</li>`).join("")}</ul>
+            </div>
+          </div>
+          ${[["Topa sahip olma %", m.stats.pos],["Şut", m.stats.shots],["Isabetli şut", m.stats.sog],["Korner", m.stats.corners]].map(([lbl,v]) => `
+            <div class="stats">
+              <div style="text-align:right;font-weight:800">${v[0]}</div>
+              <div>
+                <div class="st-lbl">${lbl}</div>
+                <div class="barwrap"><i class="lbar" style="width:${v[0]/(v[0]+v[1])*100}%"></i><i class="rbar" style="width:${v[1]/(v[0]+v[1])*100}%"></i></div>
+              </div>
+              <div style="font-weight:800">${v[1]}</div>
+            </div>`).join("")}
+          <p class="note">Şut / sahip olma değerleri tasarım özetidir. Goller, hakem ve seyirci resmi maç raporlarından alınmıştır.</p>
+        </div>
+      </article>`).join("");
+
+    list.addEventListener("click", e => {
+      const card = e.target.closest(".match");
+      if (card) card.classList.toggle("open");
+    });
+
+    const grid = document.getElementById("fixGrid");
+    function renderFix(half="all") {
+      grid.innerHTML = fixtures.filter(f => half==="all" || (half==="1" ? f[0]<=17 : f[0]>=18)).map((f,idx,arr) => {
+        const done = !!f[4];
+        const next = !done && fixtures.find(x => !x[4])?.[0] === f[0];
+        return `<div class="fx ${done?"done":""} ${next?"nextfx":""}">
+          <div class="w">H${f[0]}</div>
+          <div>
+            <div class="opp">${f[2]}</div>
+            <div class="d">${f[1]}${f[4] ? " · " + f[4] : ""}</div>
+          </div>
+          <span class="ha ${f[3]}">${f[3]==="E"?"İÇ SAHA":"DEPLASMAN"}</span>
+        </div>`;
+      }).join("");
+    }
+    renderFix();
+    document.querySelectorAll(".tabs button").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("on"));
+        btn.classList.add("on");
+        renderFix(btn.dataset.half);
+      };
+    });
+  </script>
+</body>
+</html>
