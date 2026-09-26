@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fenerbahçe 2026–27 · Lig Merkezi</title>
+  <title>FM26 · Fenerbahçe 2026–27</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #06142b;
-      --navy-2: #0b1f42;
-      --navy-3: #122a54;
-      --gold: #f5c518;
-      --gold-2: #ffe27a;
-      --yellow: #ffd200;
-      --ink: #e8eef8;
-      --muted: #9db0c9;
+      --navy: #0A0F1E;
+      --navy-2: #12162c;
+      --navy-3: #1a1840;
+      --gold: #c9b6ff;
+      --gold-2: #E6E6FA;
+      --yellow: #E664FF;
+      --ink: #E6E6FA;
+      --muted: #9b93c4;
       --win: #2ee59d;
-      --draw: #f0c14b;
-      --loss: #ff5d6c;
-      --line: rgba(245, 197, 24, .18);
-      --card: rgba(12, 32, 68, .72);
+      --draw: #E664FF;
+      --loss: #FF4164;
+      --line: rgba(110, 15, 215, .38);
+      --card: rgba(16, 14, 38, .78);
+      --twilight: #6E0FD7;
+      --cloud: #D2C8F5;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: Manrope, system-ui, sans-serif;
       background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(245,197,24,.16), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(18,60,140,.35), transparent 50%),
-        linear-gradient(180deg, #040c1c 0%, #06142b 40%, #081830 100%);
+        radial-gradient(900px 520px at 8% -8%, rgba(110,15,215,.42), transparent 58%),
+        radial-gradient(800px 420px at 100% 0%, rgba(230,100,255,.18), transparent 52%),
+        linear-gradient(180deg, #070914 0%, #0A0F1E 42%, #120c28 100%);
       color: var(--ink);
       min-height: 100vh;
     }
@@ -40,7 +42,7 @@
     header {
       position: sticky; top: 0; z-index: 40;
       backdrop-filter: blur(18px);
-      background: rgba(4, 12, 28, .72);
+      background: rgba(10, 15, 30, .86);
       border-bottom: 1px solid var(--line);
     }
     .nav {
@@ -49,10 +51,10 @@
     }
     .brand { display: flex; align-items: center; gap: 12px; }
     .crest {
-      width: 46px; height: 46px; border-radius: 50%;
-      background: conic-gradient(from 180deg, #0b2a6b, #f5c518, #0b2a6b);
+      width: 46px; height: 46px; border-radius: 12px;
+      background: linear-gradient(145deg, #6E0FD7, #E664FF);
       display: grid; place-items: center;
-      box-shadow: 0 0 0 2px rgba(245,197,24,.35);
+      box-shadow: 0 0 0 1px rgba(230,100,255,.35);
     }
     .crest img {
       width: 38px; height: 38px; border-radius: 50%;
@@ -66,7 +68,7 @@
       padding: 8px 12px; border-radius: 999px; color: var(--muted);
       border: 1px solid transparent;
     }
-    nav.links a:hover { color: var(--gold-2); border-color: var(--line); background: rgba(245,197,24,.06); }
+    nav.links a:hover { color: #fff; border-color: var(--line); background: rgba(110,15,215,.28); }
     .livebox { display: flex; align-items: center; gap: 10px; }
     .live-pill {
       display: inline-flex; align-items: center; gap: 7px;
@@ -83,10 +85,10 @@
 
     .hero {
       position: relative; overflow: hidden;
-      border: 1px solid var(--line); border-radius: 28px;
+      border: 1px solid var(--line); border-radius: 16px;
       margin: 22px 0 28px;
       background:
-        linear-gradient(120deg, rgba(6,20,43,.88), rgba(6,20,43,.45) 55%, rgba(6,20,43,.7)),
+        linear-gradient(120deg, rgba(10,15,30,.92), rgba(18,10,48,.72) 55%, rgba(10,15,30,.86)),
         url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1600&q=70') center/cover;
       min-height: 280px; padding: 36px 32px;
     }
@@ -101,7 +103,7 @@
       border: 1px solid rgba(245,197,24,.28); padding: 6px 10px; border-radius: 999px;
     }
     .hero h2 {
-      font-family: Bebas Neue, sans-serif; font-size: clamp(42px, 7vw, 78px);
+      font-family: Barlow Condensed, sans-serif; font-size: clamp(42px, 7vw, 78px);
       line-height: .9; margin: 14px 0 10px; letter-spacing: 1px;
     }
     .hero h2 em { color: var(--gold); font-style: normal; }
@@ -135,23 +137,23 @@
       border: 1px solid var(--line); border-radius: 20px; padding: 16px 18px;
     }
     .stat .lbl { font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-    .stat .val { font-family: Bebas Neue, sans-serif; font-size: 38px; line-height: 1; margin-top: 6px; }
+    .stat .val { font-family: Barlow Condensed, sans-serif; font-size: 38px; line-height: 1; margin-top: 6px; }
     .stat .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
     .cards-split { display: flex; gap: 16px; align-items: baseline; margin-top: 6px; }
-    .cards-split b { font-family: Bebas Neue, sans-serif; font-size: 34px; line-height: 1; }
+    .cards-split b { font-family: Barlow Condensed, sans-serif; font-size: 34px; line-height: 1; }
     .news-list { display: grid; gap: 8px; margin-top: 10px; }
     .news-list a { color: #eaf1fb; font-size: 12px; font-weight: 700; line-height: 1.35; text-decoration: none; }
     .news-list a:hover { color: var(--gold); }
     .gbm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
     .gbm i { display: block; text-align: center; background: #081830; border: 1px solid var(--line); border-radius: 12px; padding: 8px 4px; }
-    .gbm b { display: block; font-family: Bebas Neue, sans-serif; font-size: 26px; line-height: 1; }
+    .gbm b { display: block; font-family: Barlow Condensed, sans-serif; font-size: 26px; line-height: 1; }
     .gbm span { font-size: 10px; color: var(--muted); font-weight: 700; }
     .gbm .g b { color: var(--win); } .gbm .b b { color: var(--draw); } .gbm .m b { color: var(--loss); }
     .form { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
     .dot { width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #06142b; }
     .dot.W { background: var(--win); } .dot.D { background: var(--draw); } .dot.L { background: var(--loss); }
     .split-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; }
-    .split-line b { font-family: Bebas Neue, sans-serif; font-size: 28px; }
+    .split-line b { font-family: Barlow Condensed, sans-serif; font-size: 28px; }
     .half-boards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .half-col {
       background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px;
@@ -169,7 +171,7 @@
       padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 13px;
     }
     .club-row:last-child { border-bottom: 0; }
-    .club-row b { color: var(--gold-2); font-family: Bebas Neue, sans-serif; font-size: 20px; }
+    .club-row b { color: var(--gold-2); font-family: Barlow Condensed, sans-serif; font-size: 20px; }
     .rate-row { margin: 8px 0 10px; }
     .rate-row .lab { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
     .rate-row .lab b { color: var(--gold-2); }
@@ -178,11 +180,11 @@
 
     section { margin-bottom: 36px; }
     .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-    .sec-head h3 { font-family: Bebas Neue, sans-serif; font-size: 32px; letter-spacing: .6px; }
+    .sec-head h3 { font-family: Barlow Condensed, sans-serif; font-size: 32px; letter-spacing: .6px; }
     .sec-head p { color: var(--muted); font-size: 13px; }
 
     .panel {
-      background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
     }
     .duo { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-bottom: 28px; align-items: stretch; }
     .duo > section { display: flex; flex-direction: column; min-height: 0; }
@@ -192,7 +194,7 @@
     .table-scroll::-webkit-scrollbar-thumb { background: rgba(245,197,24,.45); border-radius: 99px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 11px 12px; text-align: left; font-size: 13px; }
-    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); background: #0b1c38; position: sticky; top: 0; z-index: 1; }
+    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); background: #16122f; position: sticky; top: 0; z-index: 1; }
     tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); }
     tbody tr:hover { background: rgba(245,197,24,.05); }
     .pos { width: 36px; font-weight: 800; color: var(--gold); }
@@ -205,7 +207,7 @@
     tbody tr { box-shadow: inset 3px 0 0 var(--tc, transparent); }
     .fb-row {
       position: sticky; top: 38px; z-index: 2;
-      background: linear-gradient(90deg, #1a3d86, #0b1c38 70%) !important;
+      background: linear-gradient(90deg, #4a16a8, #16122f 70%) !important;
       box-shadow: 0 6px 14px rgba(0,0,0,.3);
     }
     .fb-row td { color: #fff; }
@@ -229,12 +231,12 @@
     .side { text-align: center; flex: 1; }
     .badge {
       width: 64px; height: 64px; margin: 0 auto 8px; border-radius: 50%;
-      display: grid; place-items: center; font-family: Bebas Neue, sans-serif; font-size: 22px;
+      display: grid; place-items: center; font-family: Barlow Condensed, sans-serif; font-size: 22px;
       background: #0a1c3a; border: 2px solid var(--gold); overflow: hidden;
     }
     .badge img { width: 48px; height: 48px; object-fit: contain; background: #fff; border-radius: 50%; padding: 3px; }
     .vs-mid { text-align: center; color: var(--muted); }
-    .vs-mid b { display: block; color: var(--gold); font-family: Bebas Neue, sans-serif; font-size: 34px; line-height: 1; }
+    .vs-mid b { display: block; color: var(--gold); font-family: Barlow Condensed, sans-serif; font-size: 34px; line-height: 1; }
     .vs-mid .kick { display: block; margin-top: 6px; font-size: 13px; color: #d5e0f0; font-weight: 700; }
     .ha-tag { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 800; letter-spacing: .6px; padding: 3px 8px; border-radius: 999px; }
     .next-facts {
@@ -244,7 +246,7 @@
       background: rgba(8,24,48,.65); border: 1px solid var(--line); border-radius: 14px;
       padding: 10px 8px; text-align: center;
     }
-    .next-fact b { display: block; font-family: Bebas Neue, sans-serif; font-size: 20px; color: var(--gold-2); }
+    .next-fact b { display: block; font-family: Barlow Condensed, sans-serif; font-size: 20px; color: var(--gold-2); }
     .next-fact span { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: .4px; }
     .next-note { margin-top: 12px; font-size: 12px; color: #c5d4e8; line-height: 1.45; }
     .scorer-list { margin-top: 12px; display: grid; gap: 6px; }
@@ -256,7 +258,7 @@
     .scorer .rk { font-weight: 800; color: var(--gold); font-size: 12px; }
     .scorer .nm { font-size: 13px; font-weight: 700; line-height: 1.2; }
     .scorer .tm { display: block; font-size: 11px; color: var(--muted); font-weight: 600; }
-    .scorer .gl { font-family: Bebas Neue, sans-serif; font-size: 22px; color: var(--gold-2); }
+    .scorer .gl { font-family: Barlow Condensed, sans-serif; font-size: 22px; color: var(--gold-2); }
 
     .matches { display: grid; gap: 12px; }
     .match {
@@ -277,7 +279,7 @@
     .scoreline .tn.away { text-align: left; }
     .score {
       width: 92px; justify-self: center; text-align: center;
-      font-family: Bebas Neue, sans-serif; font-size: 28px;
+      font-family: Barlow Condensed, sans-serif; font-size: 28px;
       background: #081830; border-radius: 10px; padding: 2px 6px; border: 1px solid var(--line);
     }
     .res { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; width: 118px; text-align: center; justify-self: end; }
@@ -382,7 +384,7 @@
         <div class="crest"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/436.png" alt="Fenerbahçe"></div>
         <div>
           <h1>FENERBAHÇE 2026–27</h1>
-          <p>Trendyol Süper Lig · Lig Merkezi</p>
+          <p>FM26 · Trendyol Süper Lig · Club Overview</p>
         </div>
       </div>
       <div class="livebox">
@@ -399,8 +401,8 @@
 
   <main class="wrap">
     <section class="hero" id="ozet">
-      <span class="kicker" id="heroKicker">Kadıköy · canlı lig merkezi</span>
-      <h2>SARI LACİVERT<br><em>LİG MERKEZİ</em></h2>
+      <span class="kicker" id="heroKicker">FM26 · Club Overview · Kadıköy</span>
+      <h2>FENERBAHÇE<br><em>FM26 SAVE</em></h2>
       <div class="yorum-box" id="yorumBox">
         <div class="yorum-kicker">Haftanın Yorumu</div>
         <p class="yorum-line" id="yorumLine"><b>Yükleniyor:</b> Bu haftanın medya yorumları hazırlanıyor.</p>
