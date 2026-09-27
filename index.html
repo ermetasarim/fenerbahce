@@ -9,30 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #0A0F1E;
-      --navy-2: #12162c;
-      --navy-3: #1a1840;
-      --gold: #c9b6ff;
-      --gold-2: #E6E6FA;
-      --yellow: #E664FF;
-      --ink: #E6E6FA;
-      --muted: #9b93c4;
-      --win: #2ee59d;
-      --draw: #E664FF;
-      --loss: #FF4164;
-      --line: rgba(110, 15, 215, .38);
-      --card: rgba(16, 14, 38, .78);
-      --twilight: #6E0FD7;
-      --cloud: #D2C8F5;
+      --navy: #002868;
+      --navy-2: #001d4d;
+      --navy-3: #0a2a6b;
+      --gold: #D4AF37;
+      --gold-2: #D4AF37;
+      --yellow: #D4AF37;
+      --ink: #ffffff;
+      --muted: #d7e3f5;
+      --win: #22c55e;
+      --draw: #D4AF37;
+      --loss: #ef4444;
+      --line: rgba(253, 185, 19, .28);
+      --card: #001d4d;
+      --twilight: #002868;
+      --cloud: #ffffff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: Manrope, system-ui, sans-serif;
-      background:
-        radial-gradient(900px 520px at 8% -8%, rgba(110,15,215,.42), transparent 58%),
-        radial-gradient(800px 420px at 100% 0%, rgba(230,100,255,.18), transparent 52%),
-        linear-gradient(180deg, #070914 0%, #0A0F1E 42%, #120c28 100%);
+      background: #001433;
       color: var(--ink);
       min-height: 100vh;
     }
@@ -42,7 +39,7 @@
     header {
       position: sticky; top: 0; z-index: 40;
       backdrop-filter: blur(18px);
-      background: rgba(10, 15, 30, .86);
+      background: #001433;
       border-bottom: 1px solid var(--line);
     }
     .nav {
@@ -52,7 +49,7 @@
     .brand { display: flex; align-items: center; gap: 12px; }
     .crest {
       width: 46px; height: 46px; border-radius: 12px;
-      background: linear-gradient(145deg, #6E0FD7, #E664FF);
+      background: linear-gradient(145deg, #002868, #D4AF37);
       display: grid; place-items: center;
       box-shadow: 0 0 0 1px rgba(230,100,255,.35);
     }
@@ -68,7 +65,7 @@
       padding: 8px 12px; border-radius: 999px; color: var(--muted);
       border: 1px solid transparent;
     }
-    nav.links a:hover { color: #fff; border-color: var(--line); background: rgba(110,15,215,.28); }
+    nav.links a:hover { color: #002868; border-color: var(--gold); background: var(--gold); }
     .livebox { display: flex; align-items: center; gap: 10px; }
     .live-pill {
       display: inline-flex; align-items: center; gap: 7px;
@@ -87,11 +84,19 @@
       position: relative; overflow: hidden;
       border: 1px solid var(--line); border-radius: 16px;
       margin: 22px 0 28px;
-      background:
-        linear-gradient(120deg, rgba(10,15,30,.92), rgba(18,10,48,.72) 55%, rgba(10,15,30,.86)),
-        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1600&q=70') center/cover;
-      min-height: 280px; padding: 36px 32px;
+      background: #001433;
+      min-height: 360px; padding: 36px 32px;
     }
+    .hero-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 38%;
+      z-index: 0; pointer-events: none;
+    }
+    .hero-shade {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(100deg, rgba(0,20,51,.68) 0%, rgba(0,20,51,.38) 50%, rgba(0,20,51,.16) 100%);
+    }
+    .hero > *:not(.hero-bg):not(.hero-shade) { position: relative; z-index: 2; }
     .hero::after {
       content: ""; position: absolute; inset: auto 0 0 0; height: 90px;
       background: linear-gradient(transparent, rgba(6,20,43,.9));
@@ -99,8 +104,8 @@
     .kicker {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
-      color: var(--gold); background: rgba(245,197,24,.12);
-      border: 1px solid rgba(245,197,24,.28); padding: 6px 10px; border-radius: 999px;
+      color: var(--gold); background: rgba(212,175,55,.12);
+      border: 1px solid rgba(212,175,55,.28); padding: 6px 10px; border-radius: 999px;
     }
     .hero h2 {
       font-family: Barlow Condensed, sans-serif; font-size: clamp(42px, 7vw, 78px);
@@ -113,7 +118,11 @@
       display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px;
       font-size: 11px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold);
     }
-    .yorum-line { font-size: 16px; line-height: 1.5; font-weight: 600; color: #eaf1fb; }
+    .yorum-line {
+      font-size: 16px; line-height: 1.5; font-weight: 600; color: #eaf1fb;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; height: 3em; max-height: 3em;
+    }
     .yorum-line b { color: var(--gold-2); font-weight: 800; }
     .yorum-meta { margin-top: 8px; font-size: 11px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
     .yorum-dots { display: flex; gap: 5px; margin-top: 10px; }
@@ -124,15 +133,15 @@
       background: rgba(8,24,48,.7); border: 1px solid var(--line);
       padding: 10px 14px; border-radius: 14px; min-width: 110px;
     }
-    .chip b { display: block; font-size: 20px; }
-    .chip span { font-size: 11px; color: var(--muted); }
+    .chip b { display: block; font-size: 20px; color: var(--gold); }
+    .chip span { font-size: 11px; color: var(--gold); }
 
     .karnesi {
       display: grid; grid-template-columns: 1.4fr 1fr 1fr .9fr; gap: 14px; margin-bottom: 28px;
     }
     .stat {
       background:
-        linear-gradient(180deg, rgba(245,197,24,.08), transparent 42%),
+        linear-gradient(180deg, rgba(212,175,55,.08), transparent 42%),
         var(--card);
       border: 1px solid var(--line); border-radius: 20px; padding: 16px 18px;
     }
@@ -151,7 +160,8 @@
     .gbm .g b { color: var(--win); } .gbm .b b { color: var(--draw); } .gbm .m b { color: var(--loss); }
     .form { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
     .dot { width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #06142b; }
-    .dot.W { background: var(--win); } .dot.D { background: var(--draw); } .dot.L { background: var(--loss); }
+    .dot { color: #06142b; }
+    .dot.W { background: #22c55e; } .dot.D { background: #D4AF37; } .dot.L { background: #ef4444; color: #fff; }
     .split-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; }
     .split-line b { font-family: Barlow Condensed, sans-serif; font-size: 28px; }
     .half-boards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -184,47 +194,55 @@
     .sec-head p { color: var(--muted); font-size: 13px; }
 
     .panel {
-      background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      background: #001d4d; border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
     }
     .duo { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-bottom: 28px; align-items: stretch; }
     .duo > section { display: flex; flex-direction: column; min-height: 0; }
     .duo .panel { flex: 1; display: flex; flex-direction: column; height: 530px; }
-    .table-scroll { flex: 1; min-height: 0; height: 478px; max-height: 478px; overflow-y: scroll; }
+    .table-scroll { flex: 1; min-height: 0; height: 478px; max-height: 478px; overflow-y: scroll; background: #001d4d; }
     .table-scroll::-webkit-scrollbar { width: 8px; }
-    .table-scroll::-webkit-scrollbar-thumb { background: rgba(245,197,24,.45); border-radius: 99px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: rgba(212,175,55,.45); border-radius: 99px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 11px 12px; text-align: left; font-size: 13px; }
-    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); background: #16122f; position: sticky; top: 0; z-index: 1; }
-    tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); }
-    tbody tr:hover { background: rgba(245,197,24,.05); }
+    th { color: var(--muted); font-size: 11px; letter-spacing: .8px; text-transform: uppercase; border-bottom: 1px solid var(--line); background: #001d4d; position: sticky; top: 0; z-index: 1; }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,.06); background: transparent; }
+    tbody tr:hover { background: rgba(255,255,255,.04); }
     .pos { width: 36px; font-weight: 800; color: var(--gold); }
-    .team { font-weight: 700; }
-    .team-cell { display: flex; align-items: center; gap: 8px; }
+    .team { font-weight: 700; color: #fff; }
+    .team-cell { display: flex; align-items: center; gap: 10px; }
     .team-cell img, .fx img {
-      width: 22px; height: 22px; object-fit: contain; flex-shrink: 0;
+      width: 24px; height: 24px; object-fit: contain; flex-shrink: 0;
       background: #fff; border-radius: 50%; padding: 1px;
     }
-    tbody tr { box-shadow: inset 3px 0 0 var(--tc, transparent); }
     .fb-row {
       position: sticky; top: 38px; z-index: 2;
-      background: linear-gradient(90deg, #4a16a8, #16122f 70%) !important;
+      background: linear-gradient(90deg, #002868, #001d4d 55%, rgba(212,175,55,.35)) !important;
       box-shadow: 0 6px 14px rgba(0,0,0,.3);
     }
     .fb-row td { color: #fff; }
     .fx.nextfx { position: sticky; top: 0; z-index: 2; background: #12284e; }
-    .pts { font-weight: 800; }
+    .pts { font-weight: 800; color: #fff; }
     .legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 12px 16px; color: var(--muted); font-size: 11px; }
     .lg { display: flex; align-items: center; gap: 6px; }
     .bar { width: 10px; height: 10px; border-radius: 2px; }
-    .cl { background: #4ea8ff; } .el { background: #7a5cff; } .conf { background: #2ee59d; } .rel { background: #ff5d6c; }
+    .cl { background: #22c55e; }
+    .clq { background: #166534; }
+    .el { background: #2563eb; }
+    .conf { background: #7dd3fc; }
+    .rel { background: #ef4444; }
+    .po { background: #ef4444; }
+    tr.zone-cl { box-shadow: inset 3px 0 0 #22c55e; }
+    tr.zone-clq { box-shadow: inset 3px 0 0 #166534; }
+    tr.zone-el { box-shadow: inset 3px 0 0 #2563eb; }
+    tr.zone-conf { box-shadow: inset 3px 0 0 #7dd3fc; }
+    tr.zone-rel { box-shadow: inset 3px 0 0 #ef4444; }
+    tr.zone-po { box-shadow: inset 3px 0 0 #ef4444; }
 
     .next {
       display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 28px;
     }
     .next-card {
-      background:
-        linear-gradient(160deg, rgba(245,197,24,.12), rgba(12,32,68,.8)),
-        var(--navy-2);
+      background: #001d4d;
       border: 1px solid var(--line); border-radius: 22px; padding: 22px;
     }
     .vs { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
@@ -254,7 +272,7 @@
       display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center;
       padding: 6px 8px; border-radius: 10px;
     }
-    .scorer.fb { background: rgba(245,197,24,.14); }
+    .scorer.fb { background: rgba(212,175,55,.14); }
     .scorer .rk { font-weight: 800; color: var(--gold); font-size: 12px; }
     .scorer .nm { font-size: 13px; font-weight: 700; line-height: 1.2; }
     .scorer .tm { display: block; font-size: 11px; color: var(--muted); font-weight: 600; }
@@ -277,15 +295,20 @@
     .scoreline .tn { min-width: 0; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .scoreline .tn.home { text-align: right; }
     .scoreline .tn.away { text-align: left; }
+    .fb-word {
+      white-space: nowrap; background: #D4AF37; color: #002868;
+      padding: 2px 8px; border-radius: 6px; font-weight: 800;
+    }
+    .fb-word i, .fb-word b { color: #002868; font-style: normal; font-weight: 800; background: transparent; padding: 0; }
     .score {
       width: 92px; justify-self: center; text-align: center;
       font-family: Barlow Condensed, sans-serif; font-size: 28px;
       background: #081830; border-radius: 10px; padding: 2px 6px; border: 1px solid var(--line);
     }
     .res { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; width: 118px; text-align: center; justify-self: end; }
-    .res.W { background: rgba(46,229,157,.15); color: var(--win); }
-    .res.D { background: rgba(240,193,75,.15); color: var(--draw); }
-    .res.L { background: rgba(255,93,108,.15); color: var(--loss); }
+    .res.W { background: #22c55e; color: #06210f; }
+    .res.D { background: #D4AF37; color: #06142b; }
+    .res.L { background: #ef4444; color: #fff; }
     .match-body { display: none; padding: 16px; border-top: 1px solid rgba(255,255,255,.05); background: rgba(4,12,28,.28); }
     .match.open .match-body { display: block; }
     .meta-row { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 14px; }
@@ -300,7 +323,7 @@
     .tl-item { display: grid; grid-template-columns: 58px 1fr auto; gap: 8px; align-items: center; font-size: 13px; }
     .tl-min { font-weight: 800; color: var(--gold); }
     .tl-who { font-weight: 700; }
-    .tl-tag { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: rgba(245,197,24,.14); color: var(--gold); }
+    .tl-tag { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: rgba(212,175,55,.14); color: var(--gold); }
     .tl-tag.pen { background: rgba(46,229,157,.14); color: var(--win); }
     .tl-tag.card { background: rgba(240,193,75,.16); color: var(--draw); }
     .tl-tag.red { background: rgba(255,93,108,.16); color: var(--loss); }
@@ -352,21 +375,33 @@
     }
     .tabs button.on { color: #06142b; background: var(--gold); border-color: var(--gold); }
 
-    .fix-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .fix-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
     .fx {
-      display: grid; grid-template-columns: 46px 24px 1fr auto; gap: 8px; align-items: center;
-      padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(8,24,48,.45);
+      display: grid; grid-template-columns: 46px 24px 1fr; gap: 10px; align-items: center;
+      padding: 11px 12px; border: 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      border-radius: 0; background: transparent; box-shadow: inset 3px 0 0 var(--gold);
     }
-    .fx.done { opacity: .78; }
-    .fx.nextfx { border-color: rgba(245,197,24,.55); box-shadow: 0 0 0 1px rgba(245,197,24,.18) inset; }
+    .fx.done { opacity: .88; }
+    .fx.nextfx {
+      background: linear-gradient(90deg, #002868, #001d4d 55%, rgba(212,175,55,.35)) !important;
+    }
     .fx .w { font-size: 11px; color: var(--gold); font-weight: 800; }
-    .fx .opp { font-size: 13px; font-weight: 700; }
+    .fx .opp { font-size: 13px; font-weight: 700; color: #fff; }
     .fx .d { font-size: 11px; color: var(--muted); }
-    .ha { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 999px; }
-    .ha.E { background: rgba(245,197,24,.16); color: var(--gold); }
-    .ha.D { background: rgba(78,168,255,.14); color: #9fd0ff; }
+    .ha { font-size: 10px; font-weight: 800; padding: 4px 0; border-radius: 999px; width: 92px; min-width: 92px; text-align: center; display: inline-block; }
+    .ha.E { background: #22c55e; color: #06210f; }
+    .ha.D { background: #D4AF37; color: #06142b; }
 
     footer { color: var(--muted); font-size: 12px; padding: 28px 0 40px; border-top: 1px solid var(--line); }
+    footer .wrap { text-align: center; }
+    .socials { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    .socials a {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: #001d4d; border: 1px solid var(--line); color: var(--gold);
+    }
+    .socials a:hover { background: var(--gold); color: #002868; }
+    .socials svg { width: 16px; height: 16px; fill: currentColor; }
     @media (max-width: 900px) {
       .grid-4, .karnesi, .next, .fix-grid, .detail-grid, .next-facts, .half-boards, .club-grid, .duo, .stat-goal, .pitch-duo { grid-template-columns: 1fr; }
       .match-top { grid-template-columns: 1fr; text-align: center; justify-items: center; }
@@ -401,8 +436,10 @@
 
   <main class="wrap">
     <section class="hero" id="ozet">
+      <img class="hero-bg" src="stad.jpg" alt="Şükrü Saracoğlu Stadyumu" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/8/89/Istanbul_%C5%9E%C3%BCkr%C3%BC_Saraco%C4%9Flu_Stadium_1.jpg'">
+      <div class="hero-shade"></div>
       <span class="kicker" id="heroKicker">FM26 · Club Overview · Kadıköy</span>
-      <h2>FENERBAHÇE<br><em>FM26 SAVE</em></h2>
+      <h2>SARI LACİVERT<br><em>FENERBAHÇE</em></h2>
       <div class="yorum-box" id="yorumBox">
         <div class="yorum-kicker">Haftanın Yorumu</div>
         <p class="yorum-line" id="yorumLine"><b>Yükleniyor:</b> Bu haftanın medya yorumları hazırlanıyor.</p>
@@ -428,7 +465,7 @@
     <section class="club-stats" id="takimstat">
       <div class="sec-head">
         <div>
-          <h3>Fenerbahçe İstatistikleri</h3>
+          <h3>FENERBAHÇE İstatistikleri</h3>
           <p>Gol ve asist ESPN kadrosundan; pas verileri Süper Lig 6. hafta</p>
         </div>
       </div>
@@ -478,7 +515,7 @@
             <tr><td class="pos">3</td><td class="team">Beşiktaş</td><td>6</td><td>4</td><td>0</td><td>2</td><td>14</td><td>7</td><td>+7</td><td class="pts">12</td></tr>
             <tr><td class="pos">4</td><td class="team">Kocaelispor</td><td>6</td><td>4</td><td>0</td><td>2</td><td>7</td><td>4</td><td>+3</td><td class="pts">12</td></tr>
             <tr><td class="pos">5</td><td class="team">Alanyaspor</td><td>6</td><td>3</td><td>2</td><td>1</td><td>8</td><td>6</td><td>+2</td><td class="pts">11</td></tr>
-            <tr class="fb-row"><td class="pos">6</td><td class="team">Fenerbahçe</td><td>6</td><td>3</td><td>1</td><td>2</td><td>16</td><td>6</td><td>+10</td><td class="pts">10</td></tr>
+            <tr class="fb-row"><td class="pos">6</td><td class="team">FENERBAHÇE</td><td>6</td><td>3</td><td>1</td><td>2</td><td>16</td><td>6</td><td>+10</td><td class="pts">10</td></tr>
             <tr><td class="pos">7</td><td class="team">Trabzonspor</td><td>6</td><td>3</td><td>1</td><td>2</td><td>13</td><td>5</td><td>+8</td><td class="pts">10</td></tr>
             <tr><td class="pos">8</td><td class="team">Kasımpaşa</td><td>6</td><td>2</td><td>4</td><td>0</td><td>7</td><td>5</td><td>+2</td><td class="pts">10</td></tr>
             <tr><td class="pos">9</td><td class="team">Çaykur Rizespor</td><td>6</td><td>3</td><td>1</td><td>2</td><td>7</td><td>6</td><td>+1</td><td class="pts">10</td></tr>
@@ -495,10 +532,11 @@
         </table>
         </div>
         <div class="legend">
-          <span class="lg"><i class="bar cl"></i> ŞL lig aşaması / eleme</span>
-          <span class="lg"><i class="bar el"></i> Avrupa Ligi eleme</span>
-          <span class="lg"><i class="bar conf"></i> Konferans Ligi eleme</span>
-          <span class="lg"><i class="bar rel"></i> Küme düşme hattı (16–18)</span>
+          <span class="lg"><i class="bar cl"></i> ŞL Lig Aşaması</span>
+          <span class="lg"><i class="bar clq"></i> ŞL Eleme</span>
+          <span class="lg"><i class="bar el"></i> Avrupa Ligi Eleme</span>
+          <span class="lg"><i class="bar conf"></i> Konferans Ligi Eleme</span>
+          <span class="lg"><i class="bar rel"></i> Küme Düşme Hattı (16–18)</span>
         </div>
       </div>
       </section>
@@ -536,7 +574,7 @@
         </div>
         <div class="legend">
           <span class="lg"><i class="bar cl"></i> Son 16</span>
-          <span class="lg"><i class="bar el"></i> Play-off</span>
+          <span class="lg"><i class="bar po"></i> Play-Off</span>
         </div>
       </div>
       </section>
@@ -557,8 +595,21 @@
 
   <footer>
     <div class="wrap">
-      Canlı veri kaynağı: ESPN public API (tur.1). Fikstür iskeleti resmi çekim listesidir; skor ve istatistikler maç bittikçe API’den yazılır.
-      İnternet yoksa veya API yanıt vermezse ekrandaki son başarılı / yedek veri korunur.
+      © 2026 PARS Studio · <a href="https://ermetasarim.github.io/projeler" target="_blank" rel="noopener">ermetasarim.github.io/projeler</a>
+      <div class="socials">
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L22.6 22h-6.5l-5.1-6.7L5.2 22H2l7.3-8.4L1.5 2h6.6l4.6 6.1L18.9 2Zm-1.1 18h1.8L6.3 3.9H4.4L17.8 20Z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm0 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Zm11.2 1.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 8.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2Zm0 2a1.8 1.8 0 1 0 1.8 1.8A1.8 1.8 0 0 0 12 10.2Z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h3l1-3h-4V10c0-.6.4-1 1-1Z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M23 12.2s0-3.2-.4-4.6c-.2-.9-.9-1.6-1.8-1.8C19.2 5.4 12 5.4 12 5.4s-7.2 0-8.8.4c-.9.2-1.6.9-1.8 1.8C1 9 1 12.2 1 12.2s0 3.2.4 4.6c.2.9.9 1.6 1.8 1.8 1.6.4 8.8.4 8.8.4s7.2 0 8.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.4.4-4.6.4-4.6ZM9.8 15.6V8.8l6.2 3.4-6.2 3.4Z"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
 
@@ -605,7 +656,7 @@
     ];
 
     const aliases = {
-      fenerbahce: "Fenerbahçe",
+      fenerbahce: "FENERBAHÇE",
       besiktas: "Beşiktaş",
       galatasaray: "Galatasaray",
       trabzonspor: "Trabzonspor",
@@ -640,10 +691,15 @@
     }
     function pretty(name) {
       const f = fold(name);
+      if (f.includes("fenerbahce")) return "FENERBAHÇE";
       for (const [k,v] of Object.entries(aliases)) if (f.includes(k)) return v;
       return name;
     }
     function isFB(name) { const f = fold(name); return f.includes("fenerbahce"); }
+    function paintFB(name) {
+      if (!isFB(name)) return name;
+      return `<span class="fb-word"><i>FENER</i><b>BAHÇE</b></span>`;
+    }
     function pickScore(s) {
       if (s == null || s === "") return null;
       if (typeof s === "object") {
@@ -719,7 +775,7 @@
     function teamColor(name) {
       const f = fold(name);
       const hit = Object.entries(TEAM_COLORS).find(([k]) => f.includes(k));
-      return hit ? hit[1] : "#f5c518";
+      return hit ? hit[1] : "#D4AF37";
     }
     function rememberLogos(rows) {
       (rows || []).forEach(r => {
@@ -764,6 +820,20 @@
       const start = Math.max(0, Math.min(i - size + 1, list.length - size));
       return list.slice(start, start + size);
     }
+    function zoneClass(pos, target) {
+      const p = Number(pos);
+      if (target === "uclBody") {
+        if (p <= 8) return "zone-cl";
+        if (p <= 24) return "zone-po";
+        return "";
+      }
+      if (p === 1) return "zone-cl";
+      if (p === 2) return "zone-clq";
+      if (p === 3) return "zone-el";
+      if (p === 4) return "zone-conf";
+      if (p >= 16) return "zone-rel";
+      return "";
+    }
     function renderTable(rows, target) {
       if (target === "tableBody") lastTableRows = rows || [];
       const tb = document.getElementById(target || "tableBody");
@@ -771,7 +841,7 @@
       rememberLogos(rows);
       const view = rows || [];
       tb.innerHTML = view.map(r => `
-        <tr class="${fold(r.team).includes("fenerbahce") ? "fb-row" : ""}" style="--tc:${r.color || teamColor(r.team)}; ${fold(r.team).includes("fenerbahce") ? "" : `background:linear-gradient(90deg, ${r.color || teamColor(r.team)}26, transparent 58%);`}">
+        <tr class="${fold(r.team).includes("fenerbahce") ? "fb-row" : ""} ${zoneClass(r.pos, target || "tableBody")}">
           <td class="pos">${r.pos}</td>
           <td class="team"><span class="team-cell">${r.logo ? `<img src="${r.logo}" alt="">` : ""}<span>${r.team}</span></span></td>
           <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
@@ -791,9 +861,9 @@
           <div class="match-top">
             <div class="week">${m.live ? "CANLI" : (m.comp === "uefa.champions" ? "ŞAMPİYONLAR LİGİ" : "SÜPER LİG")} <b>${m.w ? m.w + ". Hafta" : "—"}</b><div class="when">${m.date}</div></div>
             <div class="scoreline">
-              <span class="tn home">${m.home}</span>
+              <span class="tn home">${paintFB(m.home)}</span>
               <span class="score">${m.hs ?? "–"} – ${m.as ?? "–"}</span>
-              <span class="tn away">${m.away}</span>
+              <span class="tn away">${paintFB(m.away)}</span>
             </div>
             <span class="res ${m.res}">${m.live ? "CANLI" : m.res === "W" ? "GALİBİYET" : m.res === "D" ? "BERABERE" : m.res === "L" ? "MAĞLUBİYET" : "PLANLI"}</span>
           </div>
@@ -850,14 +920,13 @@
       const next = !done && fixtures.find(x => !x[4])?.[0] === f[0];
       const logo = findLogo(f[2]);
       const col = teamColor(f[2]);
-      return `<div class="fx ${done?"done":""} ${next?"nextfx":""}" style="--tc:${col}; box-shadow:inset 3px 0 0 ${col};">
+      return `<div class="fx ${done?"done":""} ${next?"nextfx":""}">
         <div class="w">H${f[0]}</div>
         ${logo ? `<img src="${logo}" alt="">` : `<span></span>`}
         <div>
           <div class="opp">${f[2]}</div>
           <div class="d">${f[1]}${f[4] ? " · " + f[4] : ""}</div>
         </div>
-        <span class="ha ${f[3]}">${f[3]==="E"?"İÇ SAHA":"DEPLASMAN"}</span>
       </div>`;
     }
     function renderFix() {
@@ -893,14 +962,13 @@
         const done = !!f[4];
         const logo = findLogo(f[2]);
         const col = teamColor(f[2]);
-        return `<div class="fx ${done?"done":""} ${f[0]===nextW?"nextfx":""}" style="--tc:${col}; box-shadow:inset 3px 0 0 ${col};">
+        return `<div class="fx ${done?"done":""} ${f[0]===nextW?"nextfx":""}">
           <div class="w">H${f[0]}</div>
           ${logo ? `<img src="${logo}" alt="">` : `<span></span>`}
           <div>
             <div class="opp">${f[2]}</div>
             <div class="d">${f[1]}${f[4] ? " · " + f[4] : ""}</div>
           </div>
-          <span class="ha ${f[3]}">${f[3]==="E"?"İÇ SAHA":"DEPLASMAN"}</span>
         </div>`;
       }).join("")}</div>`;
     }
@@ -927,8 +995,8 @@
       const box = document.getElementById("nextVs");
       const fx = fixtures.find(x => !x[4]);
       if (!event) {
-        const left = fx && fx[3]==="E" ? "Fenerbahçe" : (fx ? fx[2] : "Fenerbahçe");
-        const right = fx && fx[3]==="E" ? fx[2] : "Fenerbahçe";
+        const left = fx && fx[3]==="E" ? "FENERBAHÇE" : (fx ? fx[2] : "FENERBAHÇE");
+        const right = fx && fx[3]==="E" ? fx[2] : "FENERBAHÇE";
         box.innerHTML = fx ? `<div class="side">${logoBadge(left,"FB")}<strong>${left}</strong></div>
           <div class="vs-mid"><span>${fx[1]}</span><b>HAFTA ${fx[0]}</b><span>${fx[3]==="E"?"İç saha":"Deplasman"}</span></div>
           <div class="side">${logoBadge(right,"RİV")}<strong>${right}</strong></div>` : "Fikstür tamamlandı.";
@@ -954,7 +1022,6 @@
         <div class="side">
           ${logoBadge(homeName, (home.team?.abbreviation || "EV").slice(0,3))}
           <strong>${homeName}</strong>
-          <div class="ha-tag ha E">EV SAHİBİ${hr ? " · " + hr.pos + "." : ""}</div>
         </div>
         <div class="vs-mid">
           <span>${fmtTR(event.date)}</span>
@@ -965,18 +1032,17 @@
         <div class="side">
           ${logoBadge(awayName, (away.team?.abbreviation || "DEP").slice(0,3))}
           <strong>${awayName}</strong>
-          <div class="ha-tag ha D">DEPLASMAN${ar ? " · " + ar.pos + "." : ""}</div>
         </div>
       `;
       const extra = document.getElementById("nextExtra");
       extra.innerHTML = `
         <div class="next-facts">
-          <div class="next-fact"><b>${week}. hf</b><span>Lig haftası</span></div>
-          <div class="next-fact"><b>${fbHome ? "İç saha" : "Deplasman"}</b><span>Fenerbahçe</span></div>
+          <div class="next-fact"><b>${week}. Hafta</b><span>Lig haftası</span></div>
+          <div class="next-fact"><b>${fbHome ? "İç saha" : "Deplasman"}</b><span>FENERBAHÇE</span></div>
           <div class="next-fact"><b>${hr ? hr.pts : "—"} / ${ar ? ar.pts : "—"}</b><span>Puan (ev / dep)</span></div>
           <div class="next-fact"><b>${countdownTR(event.date)}</b><span>Maça kalan</span></div>
         </div>
-        <p class="next-note">Trendyol Süper Lig · ${pretty(opp)} maçı. ${fbHome ? "Kadıköy’de" : "Deplasmanda"} oynanacak karşılaşma; skor ve kadro maç saatinde bu kartta güncellenir.</p>
+
       `;
     }
 
