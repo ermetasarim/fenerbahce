@@ -111,10 +111,18 @@
       </div>
       <div class="split"></div>
       <div class="block">
-        <div class="label">Puan durumu</div>
+        <div class="label">Trendyol Süper Lig</div>
         <table>
           <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
           <tbody id="table"></tbody>
+        </table>
+      </div>
+      <div class="split"></div>
+      <div class="block">
+        <div class="label">Şampiyonlar Ligi</div>
+        <table>
+          <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
+          <tbody id="cl-table"></tbody>
         </table>
       </div>
       <div class="split"></div>
@@ -127,9 +135,11 @@
 </div>
 <script>
 const FEED = "https://global.flashscore.ninja/726/x/feed/to_ABdATjMP_2TRNmxYR_1";
+const CL_FEED = "https://global.flashscore.ninja/726/x/feed/to_tfRdlhP9_vT1iNRGq_1";
 const SIGN = "SW9D1eZo";
 const TEAM = "MsbmracL";
 const FALLBACK = `TR÷6¬TN÷Fenerbahçe¬TI÷MsbmracL¬TM÷6¬TW÷3¬TDR÷1¬TL÷2¬TG÷16:6¬TPF÷10¬TP÷10¬~LMS÷?¬LMU÷upcoming¬LMC÷1791619200¬LMJ÷Rizespor¬LMK÷Fenerbahçe¬~LMS÷¬LMU÷w¬LMC÷1790985600¬LMF÷0¬LMG÷2¬LMJ÷Turan¬LMK÷Fenerbahçe¬~LMS÷¬LMU÷w¬LMC÷1758355200¬LMF÷8¬LMG÷0¬LMJ÷Fenerbahçe¬LMK÷Eyüpspor¬~LMS÷¬LMU÷d¬LMC÷1757865600¬LMF÷0¬LMG÷0¬LMJ÷Gaziantep FK¬LMK÷Fenerbahçe¬~LMS÷¬LMU÷d¬LMC÷1757520000¬LMF÷1¬LMG÷1¬LMJ÷Fenerbahçe¬LMK÷AS Roma¬~TR÷1¬TN÷Amedspor¬TM÷6¬TW÷4¬TDR÷1¬TL÷1¬TG÷15:7¬TPF÷8¬TP÷13¬~TR÷2¬TN÷Galatasaray¬TM÷6¬TW÷4¬TDR÷1¬TL÷1¬TG÷13:10¬TPF÷3¬TP÷13¬~TR÷3¬TN÷Beşiktaş¬TM÷6¬TW÷4¬TDR÷0¬TL÷2¬TG÷14:7¬TPF÷7¬TP÷12¬~TR÷4¬TN÷Kocaelispor¬TM÷6¬TW÷4¬TDR÷0¬TL÷2¬TG÷7:4¬TPF÷3¬TP÷12¬~TR÷5¬TN÷Alanyaspor¬TM÷6¬TW÷3¬TDR÷2¬TL÷1¬TG÷8:6¬TPF÷2¬TP÷11¬~TR÷7¬TN÷Trabzonspor¬TM÷6¬TW÷3¬TDR÷1¬TL÷2¬TG÷13:5¬TPF÷8¬TP÷10¬~TR÷8¬TN÷Kasımpaşa¬TM÷6¬TW÷2¬TDR÷4¬TL÷0¬TG÷7:5¬TPF÷2¬TP÷10¬~TR÷9¬TN÷Rizespor¬TM÷6¬TW÷3¬TDR÷1¬TL÷2¬TG÷7:6¬TPF÷1¬TP÷10¬~TR÷10¬TN÷Gaziantep FK¬TM÷6¬TW÷2¬TDR÷2¬TL÷2¬TG÷7:7¬TPF÷0¬TP÷8¬~TR÷11¬TN÷Çorum¬TM÷6¬TW÷2¬TDR÷1¬TL÷3¬TG÷13:12¬TPF÷1¬TP÷7¬~TR÷12¬TN÷Başakşehir¬TM÷6¬TW÷2¬TDR÷1¬TL÷3¬TG÷10:11¬TPF÷-1¬TP÷7¬~TR÷13¬TN÷Gençlerbirliği¬TM÷6¬TW÷2¬TDR÷1¬TL÷3¬TG÷5:13¬TPF÷-8¬TP÷7¬~TR÷14¬TN÷Erzurumspor¬TM÷6¬TW÷2¬TDR÷1¬TL÷3¬TG÷3:11¬TPF÷-8¬TP÷7¬~TR÷15¬TN÷Konyaspor¬TM÷6¬TW÷1¬TDR÷1¬TL÷4¬TG÷4:8¬TPF÷-4¬TP÷4¬~TR÷16¬TN÷Samsunspor¬TM÷6¬TW÷1¬TDR÷1¬TL÷4¬TG÷6:12¬TPF÷-6¬TP÷4¬~TR÷17¬TN÷Göztepe¬TM÷6¬TW÷0¬TDR÷3¬TL÷3¬TG÷11:15¬TPF÷-4¬TP÷3¬~TR÷18¬TN÷Eyüpspor¬TM÷6¬TW÷1¬TDR÷0¬TL÷5¬TG÷2:16¬TPF÷-14¬TP÷3¬`;
+const CL_FALLBACK = `TR÷1¬TN÷PSG¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷6:1¬TPF÷5¬TP÷3¬~TR÷2¬TN÷Bayern¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷5:0¬TPF÷5¬TP÷3¬~TR÷3¬TN÷Barcelona¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷5:1¬TPF÷4¬TP÷3¬~TR÷4¬TN÷Manchester Utd¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷4:0¬TPF÷4¬TP÷3¬~TR÷5¬TN÷Como¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷4:1¬TPF÷3¬TP÷3¬~TR÷6¬TN÷Stuttgart¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:1¬TPF÷2¬TP÷3¬~TR÷7¬TN÷Sporting¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:1¬TPF÷2¬TP÷3¬~TR÷8¬TN÷Manchester City¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷2:0¬TPF÷2¬TP÷3¬~TR÷9¬TN÷Aston Villa¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:2¬TPF÷1¬TP÷3¬~TR÷10¬TN÷Lens¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:2¬TPF÷1¬TP÷3¬~TR÷11¬TN÷Betis¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:2¬TPF÷1¬TP÷3¬~TR÷12¬TN÷Dortmund¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷3:2¬TPF÷1¬TP÷3¬~TR÷13¬TN÷Liverpool¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷2:1¬TPF÷1¬TP÷3¬~TR÷14¬TN÷Real Madrid¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷2:1¬TPF÷1¬TP÷3¬~TR÷15¬TN÷Arsenal¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷1:0¬TPF÷1¬TP÷3¬~TR÷16¬TN÷AEK¬TM÷1¬TW÷1¬TDR÷0¬TL÷0¬TG÷1:0¬TPF÷1¬TP÷3¬~TR÷17¬TN÷AS Roma¬TM÷1¬TW÷0¬TDR÷1¬TL÷0¬TG÷1:1¬TPF÷0¬TP÷1¬~TR÷18¬TN÷Shakhtar¬TM÷1¬TW÷0¬TDR÷1¬TL÷0¬TG÷1:1¬TPF÷0¬TP÷1¬~TR÷19¬TN÷PSV¬TM÷1¬TW÷0¬TDR÷1¬TL÷0¬TG÷1:1¬TPF÷0¬TP÷1¬~TR÷20¬TN÷Fenerbahçe¬TI÷MsbmracL¬TM÷1¬TW÷0¬TDR÷1¬TL÷0¬TG÷1:1¬TPF÷0¬TP÷1¬~TR÷21¬TN÷Villarreal¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷2:3¬TPF÷-1¬TP÷0¬~TR÷22¬TN÷Lille¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷2:3¬TPF÷-1¬TP÷0¬~TR÷23¬TN÷Slavia Prag¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷2:3¬TPF÷-1¬TP÷0¬~TR÷24¬TN÷Club Brugge¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷2:3¬TPF÷-1¬TP÷0¬~TR÷25¬TN÷Inter¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:2¬TPF÷-1¬TP÷0¬~TR÷26¬TN÷Atl. Madrid¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:2¬TPF÷-1¬TP÷0¬~TR÷27¬TN÷Napoli¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷0:1¬TPF÷-1¬TP÷0¬~TR÷28¬TN÷LASK¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷0:1¬TPF÷-1¬TP÷0¬~TR÷29¬TN÷Viking¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:3¬TPF÷-2¬TP÷0¬~TR÷30¬TN÷Galatasaray¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:3¬TPF÷-2¬TP÷0¬~TR÷31¬TN÷FC Porto¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷0:2¬TPF÷-2¬TP÷0¬~TR÷32¬TN÷RB Leipzig¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:4¬TPF÷-3¬TP÷0¬~TR÷33¬TN÷Feyenoord¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:5¬TPF÷-4¬TP÷0¬~TR÷34¬TN÷Sabah Baku¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷0:4¬TPF÷-4¬TP÷0¬~TR÷35¬TN÷Slovan Bratislava¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷1:6¬TPF÷-5¬TP÷0¬~TR÷36¬TN÷Bodo/Glimt¬TM÷1¬TW÷0¬TDR÷0¬TL÷1¬TG÷0:5¬TPF÷-5¬TP÷0¬`;
 const FIX = [
   { date: "10/10", opp: "Rizespor", comp: "Süper Lig", venue: "Deplasman", stamp: 1791619200 },
   { date: "14/10", opp: "Aston Villa", comp: "Şampiyonlar Ligi", venue: "Deplasman", stamp: 1791975600 },
@@ -197,6 +207,12 @@ function paintFixtures(me) {
   rows.sort((a, b) => (a.stamp || 0) - (b.stamp || 0));
   document.getElementById("fixtures").innerHTML = rows.map(f => `<tr><td class="date">${f.date}</td><td><span class="opp">${f.opp}</span><span class="comp">${f.comp}</span></td><td class="venue">${f.venue}</td></tr>`).join("");
 }
+function tableHtml(rows) {
+  return rows.map((r, i) => {
+    const meCls = r.id === TEAM || /fenerbah/i.test(r.name) ? " me" : "";
+    return `<tr class="${meCls.trim()}"><td>${i + 1}.</td><td>${r.name}</td><td class="n">${r.o}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n">${r.gf}</td><td class="n">${r.ga}</td><td class="n">${r.gd}</td><td class="n">${r.p}</td></tr>`;
+  }).join("");
+}
 function paint(data) {
   const me = data.rows.find(r => r.id === TEAM) || data.rows.find(r => /fenerbah/i.test(r.name));
   const live = me && me.results.find(isLive);
@@ -218,19 +234,25 @@ function paint(data) {
   }).join("");
   const playing = new Set();
   data.rows.forEach(row => row.results.filter(isLive).forEach(() => playing.add(row.name)));
-  document.getElementById("table").innerHTML = data.rows.map((r, i) => {
-    const meCls = r.id === TEAM || /fenerbah/i.test(r.name) ? " me" : "";
-    const play = playing.has(r.name) ? " playing" : "";
-    return `<tr class="${(meCls + play).trim()}"><td>${i + 1}.</td><td>${r.name}</td><td class="n">${r.o}</td><td class="n">${r.w}</td><td class="n">${r.d}</td><td class="n">${r.l}</td><td class="n">${r.gf}</td><td class="n">${r.ga}</td><td class="n">${r.gd}</td><td class="n">${r.p}</td></tr>`;
-  }).join("");
+  document.getElementById("table").innerHTML = tableHtml(data.rows);
   if (me) paintFixtures(me);
+}
+function paintCl(data) {
+  document.getElementById("cl-table").innerHTML = tableHtml(data.rows);
+}
+async function pull(url) {
+  const res = await fetch(url, { cache: "no-store", headers: { "x-fsign": SIGN } });
+  if (!res.ok) return "";
+  return res.text();
 }
 async function refresh() {
   try {
-    const res = await fetch(FEED, { cache: "no-store", headers: { "x-fsign": SIGN } });
-    if (!res.ok) return;
-    const text = await res.text();
+    const text = await pull(FEED);
     if (text.includes("TN")) paint(parse(text));
+  } catch (e) {}
+  try {
+    const text = await pull(CL_FEED);
+    if (text.includes("TN")) paintCl(parse(text));
   } catch (e) {}
 }
 function tick() {
@@ -239,6 +261,7 @@ function tick() {
   }).format(new Date());
 }
 paint(parse(FALLBACK));
+paintCl(parse(CL_FALLBACK));
 tick();
 setInterval(tick, 1000);
 refresh();
