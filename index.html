@@ -67,14 +67,17 @@
   table.stand th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
   tr.me td { font-weight: 640; background: rgba(0,32,91,.07); }
   tr.playing td:first-child { color: var(--live); }
-  .res td:nth-child(3) { font-family: "Barlow Condensed", sans-serif; font-size: 20px; font-weight: 700; }
-  .fix { width: 100%; border-collapse: collapse; }
-  .fix td { border-bottom: 1px solid var(--line); padding: 12px 4px; vertical-align: middle; }
-  .fix tr:last-child td { border-bottom: 0; }
-  .fix .date { width: 64px; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .fix .opp { font-weight: 500; }
-  .fix .comp { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-  .fix .venue { text-align: right; font-weight: 640; color: var(--fb); }
+  table.res, table.fix { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.res th, table.res td, table.fix th, table.fix td { padding: 11px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  table.res th:nth-child(3), table.fix th { font-family: Outfit, "Segoe UI", sans-serif; font-size: 11px; font-weight: 500; }
+  table.res th:nth-child(1), table.res td:nth-child(1), table.fix th:nth-child(1), table.fix td:nth-child(1) { width: 72px; text-align: left; color: var(--muted); font-variant-numeric: tabular-nums; }
+  table.res th:nth-child(2), table.res td:nth-child(2), table.fix th:nth-child(2), table.fix td:nth-child(2) { text-align: left; padding-left: 8px; }
+  table.res th:nth-child(3), table.res td:nth-child(3) { width: 72px; text-align: center; font-family: "Barlow Condensed", sans-serif; font-size: 20px; font-weight: 700; }
+  table.res th:nth-child(4), table.res td:nth-child(4) { width: 110px; text-align: right; font-weight: 640; }
+  table.fix th:nth-child(3), table.fix td:nth-child(3) { width: 130px; text-align: right; font-weight: 640; color: var(--fb); }
+  table.fix .opp { font-weight: 500; }
+  table.fix .comp { display: block; color: var(--muted); font-size: 12px; font-weight: 400; margin-top: 2px; }
+  table.res tr:last-child td, table.fix tr:last-child td { border-bottom: 0; }
   .w { color: #1d7a45; } .d { color: #9a7420; } .l { color: #b42318; }
   a { color: inherit; }
   @media (max-width: 700px) {
@@ -113,7 +116,10 @@
       <div class="split"></div>
       <div class="block">
         <div class="label">Son sonuçlar</div>
-        <table class="res"><tbody id="results"></tbody></table>
+        <table class="res">
+          <thead><tr><th>Tarih</th><th>Rakip</th><th>Skor</th><th>Sonuç</th></tr></thead>
+          <tbody id="results"></tbody>
+        </table>
       </div>
       <div class="split"></div>
       <div class="block">
@@ -134,7 +140,10 @@
       <div class="split"></div>
       <div class="block">
         <div class="label">Fikstür</div>
-        <table class="fix"><tbody id="fixtures"></tbody></table>
+        <table class="fix">
+          <thead><tr><th>Tarih</th><th>Rakip</th><th>Saha</th></tr></thead>
+          <tbody id="fixtures"></tbody>
+        </table>
       </div>
     </div>
   </section>
