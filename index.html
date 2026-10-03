@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Fenerbahçe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@560;700&family=Outfit:wght@380;500;640&display=swap" rel="stylesheet" />
@@ -20,6 +20,7 @@
   * { box-sizing: border-box; }
   body {
     margin: 0;
+    overflow-x: hidden;
     font-family: Outfit, "Segoe UI", sans-serif;
     color: var(--ink);
     background:
@@ -81,9 +82,24 @@
   .w { color: #1d7a45; } .d { color: #9a7420; } .l { color: #b42318; }
   a { color: inherit; }
   @media (max-width: 700px) {
-    header h1 { font-size: 32px; }
-    .score { font-size: 62px; }
-    .team { font-size: 16px; }
+    .wrap { width: min(100% - 16px, 980px); padding: 16px 0 40px; }
+    header { align-items: flex-start; }
+    header h1 { font-size: 30px; }
+    .clock b { font-size: 16px; }
+    .head { padding: 14px; }
+    .head h2 { font-size: 26px; }
+    .mark { width: 38px; height: 38px; }
+    .block { padding: 14px 12px 6px; }
+    .scoreboard { gap: 6px; }
+    .team { font-size: 15px; line-height: 1.15; overflow-wrap: anywhere; }
+    .score { font-size: 52px; }
+    .split { margin: 4px 12px 0; }
+    .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.stand { min-width: 620px; }
+    table.res th:nth-child(1), table.res td:nth-child(1), table.fix th:nth-child(1), table.fix td:nth-child(1) { width: 54px; }
+    table.res th:nth-child(4), table.res td:nth-child(4) { width: 86px; font-size: 12px; }
+    table.fix th:nth-child(3), table.fix td:nth-child(3) { width: 92px; font-size: 13px; }
+    table.res td:nth-child(3) { font-size: 18px; }
   }
 </style>
 </head>
@@ -124,18 +140,22 @@
       <div class="split"></div>
       <div class="block">
         <div class="label">Trendyol Süper Lig</div>
+        <div class="scroller">
         <table class="stand">
           <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
           <tbody id="table"></tbody>
         </table>
+        </div>
       </div>
       <div class="split"></div>
       <div class="block">
         <div class="label">Şampiyonlar Ligi</div>
+        <div class="scroller">
         <table class="stand">
           <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
           <tbody id="cl-table"></tbody>
         </table>
+        </div>
       </div>
       <div class="split"></div>
       <div class="block">
