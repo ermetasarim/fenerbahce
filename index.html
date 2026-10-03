@@ -57,7 +57,14 @@
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th, td { padding: 9px 8px; text-align: left; border-bottom: 1px solid var(--line); }
   th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  table.stand { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
+  table.stand th, table.stand td { padding: 9px 0; text-align: center; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  table.stand th:nth-child(1), table.stand td:nth-child(1) { width: 42px; }
+  table.stand th:nth-child(2), table.stand td:nth-child(2) { width: auto; text-align: left; padding-left: 8px; }
+  table.stand th:nth-child(n+3), table.stand td:nth-child(n+3) { width: 46px; }
+  table.stand th:nth-child(9), table.stand td:nth-child(9) { width: 52px; }
+  table.stand th:last-child, table.stand td:last-child { width: 46px; font-weight: 640; }
+  table.stand th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
   tr.me td { font-weight: 640; background: rgba(0,32,91,.07); }
   tr.playing td:first-child { color: var(--live); }
   .res td:nth-child(3) { font-family: "Barlow Condensed", sans-serif; font-size: 20px; font-weight: 700; }
@@ -74,7 +81,6 @@
     header h1 { font-size: 32px; }
     .score { font-size: 62px; }
     .team { font-size: 16px; }
-    th:nth-child(n+5):nth-child(-n+7), td:nth-child(n+5):nth-child(-n+7) { display: none; }
   }
 </style>
 </head>
@@ -112,7 +118,7 @@
       <div class="split"></div>
       <div class="block">
         <div class="label">Trendyol Süper Lig</div>
-        <table>
+        <table class="stand">
           <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
           <tbody id="table"></tbody>
         </table>
@@ -120,7 +126,7 @@
       <div class="split"></div>
       <div class="block">
         <div class="label">Şampiyonlar Ligi</div>
-        <table>
+        <table class="stand">
           <thead><tr><th>#</th><th>Takım</th><th class="n">O</th><th class="n">G</th><th class="n">B</th><th class="n">M</th><th class="n">A</th><th class="n">Y</th><th class="n">Av</th><th class="n">P</th></tr></thead>
           <tbody id="cl-table"></tbody>
         </table>
